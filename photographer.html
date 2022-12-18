@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./style/style.css">
     <script src="/scripts/pages/photographer.js" defer></script>
     <script src="/scripts/utils/contactForm.js" defer></script>
   </head>
@@ -15,14 +16,14 @@
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button display-modal-button">Contactez-moi</button>
       </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img class="display-modal-button" src="assets/icons/close.svg" />
         </header>
 				<form>
 					<div>

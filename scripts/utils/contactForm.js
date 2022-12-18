@@ -1,9 +1,13 @@
-function displayModal() {
-    const modal = document.getElementById("contact_modal");
-	modal.style.display = "block";
-}
+const displayModal = [...document.querySelectorAll('.display-modal-button')],
+contactModal = document.getElementById('contact_modal')
 
-function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
-}
+let modalDisplayed = "block"
+
+
+displayModal.forEach(btn => {
+    btn.addEventListener('click', () => {
+        contactModal.style.display = modalDisplayed
+        modalDisplayed = modalDisplayed === 'block' ? 'none' : 'block'
+    })
+    
+})
