@@ -4,8 +4,14 @@
 
 .photograph-header {
     background-color: #FAFAFA;
-    height: 300px;
     margin: 0 100px;
+    display: flex;
+    flex-direction :column;
+}
+
+.photograph-header img{
+    height: 20vh;
+    object-fit: contain;
 }
 
 .contact_button {
@@ -73,4 +79,15 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+
+.photographer-gallery{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photographer-image img{
+    width: 25vw;
+    object-fit: contain;
+
 }

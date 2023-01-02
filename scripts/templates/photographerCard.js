@@ -1,26 +1,36 @@
 class PhotographerCard {
-    constructor(photographer) {
+    constructor(photographer){
         this.photographer = photographer
     }
 
-    getInfos() {
-        return console.log(this.photographer.name)
-    }
-
     createPhotographerCard() {
-
+        
         const container = document.createElement('article')
         container.classList.add('photographer-card')
 
-        /*const cardContent = `
-        <img src="./assets/photographers/${this.photographer.portrait}>
-        <h2>${this.photographer.name}</h2>`*/
+        const { name, portrait, city, country, tagline, price, id } = this.photographer;
 
         const cardContent = `
-        <img src="./assets/photographers/${this.photographer.portrait}">
-        <h2>${this.photographer.name}</h2>`
+        <a href ="./photographer.html?id=${id}">
+            <img src="./assets/photographers/${portrait}">
+            <h2>
+                ${name}
+            </h2>
+        </a>
+        <p>
+            <span class="place">
+                ${city}, ${country}
+            </span>
+            <span class="tagline">
+                ${tagline}
+            </span>
+            <span class="price">
+                ${price}€/jour
+            </span>
+        </p>`
 
         container.innerHTML = cardContent
+        
         return container
     }
 }

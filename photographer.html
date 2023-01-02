@@ -5,20 +5,31 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="./style/style.css">
-    <script src="/scripts/pages/photographer.js" defer></script>
-    <script src="/scripts/utils/contactForm.js" defer></script>
+    <script src="./scripts/api/Api.js" defer></script>  
+    <script src="./scripts/templates/photographerBanner.js" defer></script>
+    <script src="./scripts/templates/photographerGallery.js" defer></script>
+    <script src="./scripts/pages/photographer.js" defer></script>
+    <!-- <script src="./scripts/utils/contactForm.js" defer></script> -->
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="./index.html"><img src="assets/images/logo.png" class="logo" /></a>      
     </header>
+
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button display-modal-button">Contactez-moi</button>
+      <div class="photographer-banner"></div>
+      <div class="sorting-buttons">
+        <ul class="sorting-buttons-container">
+          <li class="sorting-button" data-sorting-value="title">nom</li>
+          <li class="sorting-button" data-sorting-value="likes">like</li>
+          <li class="sorting-button" data-sorting-value="date">date</li>
+        </ul>
       </div>
+      <div class="photographer-gallery"></div>
     </main>
+
     <div id="contact_modal">
 			<div class="modal">
 				<header>
@@ -34,5 +45,6 @@
 				</form>
 			</div>
 		</div>
+
   </body>
 </html>
