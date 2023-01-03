@@ -12,7 +12,6 @@ async function main() {
     console.log('loaded index')
     console.log(photographersInfos, mediaInfos)
 
-
     photographersInfos.forEach(photographer => {
         const card = new PhotographerCard(photographer)
         console.log(photographer, card)

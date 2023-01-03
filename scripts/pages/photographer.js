@@ -60,7 +60,7 @@ async function main() {
 
         const myImages = document.querySelectorAll('.photographer-image')
 
-        //when i click, open the carousel wtih the right index
+        //when I click, open the carousel wtih the right index
         myImages.forEach((image, idx) => 
             image.addEventListener('click', () => console.log(myMedia, idx)))
     }

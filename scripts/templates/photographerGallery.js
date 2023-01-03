@@ -1,35 +1,20 @@
+import MediaFactory from "../factories/mediaFactory.js"
+
 export default class PhotographerGallery {
     constructor(gallery, photographer) {
-        this.photographer = photographer
-        this.gallery = gallery
+        this._photographer = photographer.name.split(' ')[0]
+        this._gallery = gallery
     }
 
     createPhotographerGallery() {
-
-        const { title, image, likes, date, video } = this.gallery
-
         const $container = document.createElement('div')
         $container.classList.add('photographer-image')
 
-        console.log(this.photographer.name.split(' ')[0])
+        const media = new MediaFactory(this._gallery, this._photographer)
 
-        const fileName = this.photographer.name.split(' ')[0]
+        // createTag method get the media type and create img or video tag 
+        const cardContent = media.createTag()
 
-        console.log(fileName)
-
-        const cardContent =
-            image ?
-                `
-            <img src="./assets/sample-photos/${fileName}/${image}">
-            `
-                :
-                `
-            <video loop muted autoplay width="250">
-        
-            <source src="./assets/sample-photos/${fileName}/${video}"
-                    type="video/mp4">
-                    </video>
-            `
         $container.innerHTML = cardContent
         return $container
     }
