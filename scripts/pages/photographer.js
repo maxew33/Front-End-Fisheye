@@ -5,7 +5,11 @@ import PhotographerBanner from "../templates/photographerBanner.js"
 const api = new MyApi('./../../data/photographers.json'),
     mainContainer = document.querySelector('.photographer-banner'),
     gallery = document.querySelector('.photographer-gallery'),
-    carousel = document.querySelector('.photographer-carousel')
+    carousel = document.querySelector('.photographer-carousel'),
+    carouselImagesContainer = document.querySelector('.images-container')
+
+let imageIndex = 0, //index of the current photo for the carousel
+    imageQty = 0
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),
@@ -31,6 +35,10 @@ async function main() {
     }
     )
 
+    imageQty = myMedia.length
+
+    console.log(imageQty)
+
     const fillGallery = (sortingValue) => {
 
         //remove content from the gallery
@@ -51,23 +59,24 @@ async function main() {
         myMedia.forEach(media => {
             const photographerGallery = new PhotographerGallery(media, myPhotographer[0])
             const img = photographerGallery.createPhotographerGallery(),
-            imgClone = img.cloneNode(true) // clone the img const in order to uyse it a second time
+                imgClone = img.cloneNode(true) // clone the img const in order to uyse it a second time
 
-            carousel.appendChild(img)
-            gallery.appendChild(imgClone)
+            gallery.appendChild(img)
+            carouselImagesContainer.appendChild(imgClone)
 
         })
 
         const myImages = document.querySelectorAll('.photographer-image')
 
         //when I click, open the carousel wtih the right index
-        myImages.forEach((image, idx) => 
-            image.addEventListener('click', () => console.log(myMedia, idx)))
+        myImages.forEach((image, idx) =>
+            image.addEventListener('click', () => {
+                console.log(myMedia, idx)
+                carousel.style.display = 'flex'
+            }))
     }
 
     fillGallery('title')
-
-    // const photographerInfos = new PhotographerInfos(photographer)
 
     const sortingButtons = document.querySelectorAll('.sorting-button')
 
@@ -87,6 +96,42 @@ async function main() {
     script2.async = true
     document.head.appendChild(script2)*/
 
+
+    //Contact modal
+
+    const displayModal = [...document.querySelectorAll('.display-modal-button')],
+        contactModal = document.getElementById('contact_modal')
+
+    let modalDisplayed = "block"
+
+    displayModal.forEach(btn => {
+        console.log('ccc')
+        btn.addEventListener('click', () => {
+            console.log('ccc')
+            contactModal.style.display = modalDisplayed
+            modalDisplayed = modalDisplayed === 'block' ? 'none' : 'block'
+        })
+
+    })
+
 }
 
 main()
+
+// carousel navigation
+
+const closeCarousel = document.querySelector('.close'),
+    carouselBtns = [...document.querySelectorAll('.carousel-btn')]
+
+closeCarousel.addEventListener('click', () => {
+    carousel.style.display = 'none'
+})
+
+carouselBtns.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+        imageIndex += (idx * 2 - 1)
+        console.log(imageIndex)
+        imageIndex < 0 || imageIndex > imageQty ? console.log('caca') : console.log('ok')
+        document.documentElement.style.setProperty('--carousel-idx', imageIndex)
+    })
+})

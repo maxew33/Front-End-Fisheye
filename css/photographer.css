@@ -1,3 +1,7 @@
+:root{
+    --carousel-idx: 0;
+}
+
 #contact_modal {
     display: none;
 }
@@ -86,8 +90,39 @@ form input {
     flex-wrap: wrap;
 }
 
+.photographer-image{
+    min-width: 70vw;
+}
+
 .photographer-image img{
-    width: 25vw;
+    height: 90vh;
+    width: inherit;
     object-fit: contain;
 
+}
+
+.photographer-carousel{
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(5px);
+    display: none;
+}
+
+.images-overview{
+    width: 70vw;
+    height: 90vw;
+    overflow: hidden;
+}
+
+.images-container{
+    height: 90vw;
+    display: flex;
+    transition: .5s transform ease-in-out;
+    transform: translate(calc(var(--carousel-idx) * -70vw));
+}
+
+.images-container img{    
+    width: 70vw;
+    height: 90vw;
+    object-fit: contain;
 }

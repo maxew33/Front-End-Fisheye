@@ -3,7 +3,6 @@ contactModal = document.getElementById('contact_modal')
 
 let modalDisplayed = "block"
 
-
 displayModal.forEach(btn => {
     btn.addEventListener('click', () => {
         contactModal.style.display = modalDisplayed
