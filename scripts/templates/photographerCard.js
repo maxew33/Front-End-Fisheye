@@ -1,12 +1,12 @@
-class PhotographerCard {
+export default class PhotographerCard {
     constructor(photographer){
         this.photographer = photographer
     }
 
     createPhotographerCard() {
         
-        const container = document.createElement('article')
-        container.classList.add('photographer-card')
+        const $container = document.createElement('article')
+        $container.classList.add('photographer-card')
 
         const { name, portrait, city, country, tagline, price, id } = this.photographer;
 
@@ -29,8 +29,10 @@ class PhotographerCard {
             </span>
         </p>`
 
-        container.innerHTML = cardContent
+        $container.innerHTML = cardContent
         
-        return container
+        return $container
     }
 }
+
+// export {PhotographerCard}

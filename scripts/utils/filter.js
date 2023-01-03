@@ -1,1 +1,3 @@
-console.log('filter loaded')
+export default function init(){
+    console.log('filter loaded')
+}

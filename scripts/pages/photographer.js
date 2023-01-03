@@ -1,6 +1,11 @@
-const api = new Api('./../../data/photographers.json'),
+import MyApi from "../api/Api.js"
+import PhotographerGallery from "../templates/photographerGallery.js"
+import PhotographerBanner from "../templates/photographerBanner.js"
+
+const api = new MyApi('./../../data/photographers.json'),
     mainContainer = document.querySelector('.photographer-banner'),
-    gallery = document.querySelector('.photographer-gallery')
+    gallery = document.querySelector('.photographer-gallery'),
+    carousel = document.querySelector('.photographer-carousel')
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),
@@ -45,12 +50,17 @@ async function main() {
         //fill the gallery with the filtered data
         myMedia.forEach(media => {
             const photographerGallery = new PhotographerGallery(media, myPhotographer[0])
-            const img = photographerGallery.createPhotographerGallery()
-            gallery.appendChild(img)
+            const img = photographerGallery.createPhotographerGallery(),
+            imgClone = img.cloneNode(true) // clone the img const in order to uyse it a second time
+
+            carousel.appendChild(img)
+            gallery.appendChild(imgClone)
+
         })
 
         const myImages = document.querySelectorAll('.photographer-image')
 
+        //when i click, open the carousel wtih the right index
         myImages.forEach((image, idx) => 
             image.addEventListener('click', () => console.log(myMedia, idx)))
     }
@@ -67,7 +77,7 @@ async function main() {
     }))
 
     /* add my utils js after everything is loaded */
-    const script = document.createElement('script')
+    /*const script = document.createElement('script')
     script.src = "./scripts/utils/filter.js"
     script.async = true
     document.head.appendChild(script)
@@ -75,7 +85,7 @@ async function main() {
     const script2 = document.createElement('script')
     script2.src = "./scripts/utils/contactForm.js"
     script2.async = true
-    document.head.appendChild(script2)
+    document.head.appendChild(script2)*/
 
 }
 

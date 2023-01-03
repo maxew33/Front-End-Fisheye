@@ -1,12 +1,12 @@
-class PhotographerBanner{
+export default class PhotographerBanner{
     constructor(photographer){
         this.photographer = photographer
     }
 
     createPhotographerBanner() {
         
-        const container = document.createElement('div')
-        container.classList.add('photograph-header')
+        const $container = document.createElement('div')
+        $container.classList.add('photograph-header')
 
         const { name, portrait, city, country, tagline } = this.photographer
 
@@ -26,7 +26,7 @@ class PhotographerBanner{
             <img src="./assets/photographers/${portrait}">
             `
 
-        container.innerHTML = cardContent
-        return container
+        $container.innerHTML = cardContent
+        return $container
     }
 }

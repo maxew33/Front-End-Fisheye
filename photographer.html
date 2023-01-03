@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-    <link href="./css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="./style/style.css">
-    <script src="./scripts/api/Api.js" defer></script>  
-    <script src="./scripts/templates/photographerBanner.js" defer></script>
-    <script src="./scripts/templates/photographerGallery.js" defer></script>
-    <script src="./scripts/pages/photographer.js" defer></script>
-    <!-- <script src="./scripts/utils/contactForm.js" defer></script> -->
-  </head>
-  <body>
-    <header>
-      <a href="./index.html"><img src="assets/images/logo.png" class="logo" /></a>      
-    </header>
 
-    <main id="main">
-      <div class="photographer-banner"></div>
-      <div class="sorting-buttons">
-        <ul class="sorting-buttons-container">
-          <li class="sorting-button" data-sorting-value="title">nom</li>
-          <li class="sorting-button" data-sorting-value="likes">like</li>
-          <li class="sorting-button" data-sorting-value="date">date</li>
-        </ul>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+  <link href="./css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./style/style.css">
+  <!-- <script src="./scripts/api/Api.js" defer></script>
+  <script src="./scripts/templates/photographerBanner.js" defer></script>
+  <script src="./scripts/templates/photographerGallery.js" defer></script> -->
+  <script src="./scripts/pages/photographer.js" type="module"></script>
+  <!-- <script src="./scripts/utils/contactForm.js" defer></script> -->
+</head>
+
+<body>
+  <header>
+    <a href="./index.html"><img src="assets/images/logo.png" class="logo" /></a>
+  </header>
+
+  <main id="main">
+    <div class="photographer-banner"></div>
+    <div class="sorting-buttons">
+      <ul class="sorting-buttons-container">
+        <li class="sorting-button" data-sorting-value="title">nom</li>
+        <li class="sorting-button" data-sorting-value="likes">like</li>
+        <li class="sorting-button" data-sorting-value="date">date</li>
+      </ul>
+    </div>
+    <div class="photographer-gallery"></div>
+    <div class="photographer-carousel">
+      <button class="close">X</button>
+      <button class="prev">prev</button>
+      <button
+        class="next">next</button>
       </div>
-      <div class="photographer-gallery"></div>
-    </main>
+  </main>
 
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img class="display-modal-button" src="assets/icons/close.svg" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <img class="display-modal-button" src="assets/icons/close.svg" />
+      </header>
+      <form>
+        <div>
+          <label>Prénom</label>
+          <input />
+        </div>
+        <button class="contact_button">Envoyer</button>
+      </form>
+    </div>
+  </div>
 
-  </body>
+</body>
+
 </html>

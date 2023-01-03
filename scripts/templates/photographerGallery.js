@@ -1,4 +1,4 @@
-class PhotographerGallery {
+export default class PhotographerGallery {
     constructor(gallery, photographer) {
         this.photographer = photographer
         this.gallery = gallery
@@ -8,8 +8,8 @@ class PhotographerGallery {
 
         const { title, image, likes, date, video } = this.gallery
 
-        const container = document.createElement('div')
-        container.classList.add('photographer-image')
+        const $container = document.createElement('div')
+        $container.classList.add('photographer-image')
 
         console.log(this.photographer.name.split(' ')[0])
 
@@ -24,13 +24,13 @@ class PhotographerGallery {
             `
                 :
                 `
-            <video controls loop muted autoplay width="250">
+            <video loop muted autoplay width="250">
         
             <source src="./assets/sample-photos/${fileName}/${video}"
                     type="video/mp4">
                     </video>
             `
-        container.innerHTML = cardContent
-        return container
+        $container.innerHTML = cardContent
+        return $container
     }
 }
