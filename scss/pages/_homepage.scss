@@ -1,7 +1,6 @@
-#main {
+#main-homepage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
     width: 100%;
     height: 40rem;
 }
@@ -15,10 +14,7 @@
         @include flex-center-between-column;
 
         .photographer-portrait {
-            height: 12.5rem;
-            width: 12.5rem;
-            object-fit: cover;
-            border-radius: 50%;
+            @include portrait;
             margin-bottom: 1.75rem;
         }
 
@@ -29,22 +25,22 @@
 
     }
 
-    .photographer-infos{
+    .photographer-infos {
         @include flex-center-between-column;
         margin: .25rem 0 1.75rem;
         line-height: 1.15rem;
 
-        .photographer-place{
+        .photographer-place {
             font-size: .8rem;
             color: $color-1;
         }
 
-        .photographer-tagline{
-font-size: .65rem;
-font-weight: bold;
+        .photographer-tagline {
+            font-size: .65rem;
+            font-weight: bold;
         }
 
-        .photographer-price{
+        .photographer-price {
             font-size: .6rem;
             color: $color-2;
         }

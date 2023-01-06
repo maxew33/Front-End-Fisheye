@@ -5,28 +5,28 @@ export default class PhotographerBanner{
 
     createPhotographerBanner() {
         
-        const $container = document.createElement('div')
-        $container.classList.add('photograph-header')
+        /*const $container = document.createElement('div')
+        $container.classList.add('photograph-header')*/
 
         const { name, portrait, city, country, tagline } = this.photographer
 
         const cardContent = `
         <div class="photographer-infos">
-            <h2>
+            <h2 class="photographer-name">
                 ${name}
             </h2>
-            <span class="place">
+            <span class="photographer-place">
                 ${city}, ${country}
             </span>
-            <span class="tagline">
+            <span class="photographer-tagline">
                 ${tagline}
             </span>
         </div>
         <button class="contact_button display-modal-button">Contactez-moi</button>
-            <img src="./assets/photographers/${portrait}">
+            <img src="./assets/photographers/${portrait}" class="photographer-portrait" alt="${name}">
             `
 
-        $container.innerHTML = cardContent
-        return $container
+        //$container.innerHTML = cardContent
+        return cardContent
     }
 }

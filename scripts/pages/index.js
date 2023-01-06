@@ -3,7 +3,7 @@ import PhotographerCard from "../templates/photographerCard.js"
 import init from "../utils/filter.js"
 
 const api = new MyApi('./../../data/photographers.json'),
-    photographersContainer = document.getElementById('main')
+    photographersContainer = document.getElementById('main-homepage')
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),

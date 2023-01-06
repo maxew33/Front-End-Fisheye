@@ -16,7 +16,7 @@ class Photo extends Media{
     }
 
     createTag(){
-        const tag = `<img src="${this.createPath()}/${this.filename}">`
+        const tag = `<img src="${this.createPath()}/${this.filename}" class="photographer-media photographer-image">`
         return tag
     }
 }
@@ -29,9 +29,8 @@ class Video extends Media{
 
     createTag(){
         const tag = `
-        <video loop muted autoplay width="250">
-    
-        <source src="${this.createPath()}/${this.filename}"
+        <video loop muted autoplay width="250" class="photographer-media photographer-video">    
+            <source src="${this.createPath()}/${this.filename}"
                 type="video/mp4">
         </video>`
         return tag

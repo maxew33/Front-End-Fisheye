@@ -1,0 +1,208 @@
+:root {
+    --carousel-idx: 0;
+}
+
+/* BANNER */
+
+.photographer-banner {
+    @include flex-center-between;
+    background: $bg-3;
+    padding: 3.5rem 3.15rem;
+
+    .photographer-infos {
+
+        @include flex-around-column;
+        height: 12.5rem;
+
+        .photographer-name {
+            color: $color-1;
+            font-size: 4rem;
+        }
+
+        .photographer-place {
+            font-size: 1.5rem;
+            color: $color-1;
+        }
+
+        .photographer-tagline {
+            font-size: 1.125rem;
+        }
+    }
+
+    .display-modal-button {
+        border: none;
+        background: $bg-1;
+        color: white;
+        transition: background-color .125s ease-in-out;
+        cursor: pointer;
+        width: 10rem;
+        aspect-ratio: 1/0.4;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: bold;
+
+        &:hover {
+            color: black;
+            background: $bg-2;
+        }
+    }
+
+    .photographer-portrait {
+        @include portrait;
+    }
+}
+
+/* SORTING BUTTON */
+
+/* GALLERY */
+.photographer-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 6rem;
+    width: 100%;
+
+    .photographer-image,
+    .photographer-video {
+        width: 100%;
+        aspect-ratio: 1/0.86;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .photographer-image-infos {
+        padding-top: .75rem;
+        @include flex-center-between;
+        font-size: 1.5rem;
+        color: $color-3;
+    }
+}
+
+
+/* LIGHTBOX MODAL (carousel) */
+
+.photographer-carousel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff5;
+    backdrop-filter: blur(5px);
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    place-content: center;
+
+    .images-overview {
+        width: 70vw;
+        height: 90vw;
+        overflow: hidden;
+
+        .images-container {
+            height: 90vw;
+            display: flex;
+            align-items: center;
+            transition: .5s transform ease-in-out;
+            transform: translate(calc(var(--carousel-idx) * -70vw));
+
+            .photographer-media {
+                width: 70vw;
+                height: 80vw;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .carousel-btn{
+        position: absolute;
+        color: $color-3;
+        font-size: 3rem;
+        border: none;
+        cursor: pointer;
+        background: none;
+    }
+
+    .carousel-close{
+        top: 10vh; 
+        right: 10vw;
+    }
+
+    .carousel-direction-btn{
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-prev{
+        left: 10vw;
+    }
+
+    .carousel-next{
+        right: 10vw;
+    }
+}
+
+/* FORM MODAL */
+
+// ORIGIN CODE !!!
+#contact_modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    height: 40vh;
+    aspect-ratio: 5 / 3;
+    transform: translate(-50%, -50%);
+}
+
+
+.modal {
+    border-radius: 5px;
+    background-color: #DB8876;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+}
+
+.modal header {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img {
+    cursor: pointer;
+}
+
+.modal header h2 {
+    font-size: 64px;
+    font-weight: normal;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 36px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 26px;
+}
+
+form input {
+    width: 100%;
+    height: 68px;
+    border: none;
+    border-radius: 5px;
+}

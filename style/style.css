@@ -152,7 +152,7 @@ a:visited {
   color: #901c1c;
 }
 
-#main {
+#main-homepage {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
@@ -203,6 +203,203 @@ a:visited {
 .photographer-card .photographer-infos .photographer-price {
   font-size: 0.6rem;
   color: #525252;
+}
+
+:root {
+  --carousel-idx: 0;
+}
+
+/* BANNER */
+.photographer-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafafa;
+  padding: 3.5rem 3.15rem;
+}
+.photographer-banner .photographer-infos {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 12.5rem;
+}
+.photographer-banner .photographer-infos .photographer-name {
+  color: #d3573c;
+  font-size: 4rem;
+}
+.photographer-banner .photographer-infos .photographer-place {
+  font-size: 1.5rem;
+  color: #d3573c;
+}
+.photographer-banner .photographer-infos .photographer-tagline {
+  font-size: 1.125rem;
+}
+.photographer-banner .display-modal-button {
+  border: none;
+  background: #901c1c;
+  color: white;
+  transition: background-color 0.125s ease-in-out;
+  cursor: pointer;
+  width: 10rem;
+  aspect-ratio: 1/0.4;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.photographer-banner .display-modal-button:hover {
+  color: black;
+  background: #d3573c;
+}
+.photographer-banner .photographer-portrait {
+  height: 12.5rem;
+  width: 12.5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+/* SORTING BUTTON */
+/* GALLERY */
+.photographer-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 6rem;
+  width: 100%;
+}
+.photographer-gallery .photographer-image,
+.photographer-gallery .photographer-video {
+  width: 100%;
+  aspect-ratio: 1/0.86;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+.photographer-gallery .photographer-image-infos {
+  padding-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  color: #901c1c;
+}
+
+/* LIGHTBOX MODAL (carousel) */
+.photographer-carousel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.3333333333);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  place-content: center;
+}
+.photographer-carousel .images-overview {
+  width: 70vw;
+  height: 90vw;
+  overflow: hidden;
+}
+.photographer-carousel .images-overview .images-container {
+  height: 90vw;
+  display: flex;
+  align-items: center;
+  transition: 0.5s transform ease-in-out;
+  transform: translate(calc(var(--carousel-idx) * -70vw));
+}
+.photographer-carousel .images-overview .images-container .photographer-media {
+  width: 70vw;
+  height: 80vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.photographer-carousel .carousel-btn {
+  position: absolute;
+  color: #901c1c;
+  font-size: 3rem;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+.photographer-carousel .carousel-close {
+  top: 10vh;
+  right: 10vw;
+}
+.photographer-carousel .carousel-direction-btn {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.photographer-carousel .carousel-prev {
+  left: 10vw;
+}
+.photographer-carousel .carousel-next {
+  right: 10vw;
+}
+
+/* FORM MODAL */
+#contact_modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 40vh;
+  aspect-ratio: 5/3;
+  transform: translate(-50%, -50%);
+}
+
+.modal {
+  border-radius: 5px;
+  background-color: #DB8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
+}
+
+.modal header {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal header img {
+  cursor: pointer;
+}
+
+.modal header h2 {
+  font-size: 64px;
+  font-weight: normal;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+form label {
+  color: #312E2E;
+  font-size: 36px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
+}
+
+form input {
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
 }
 
 body {
