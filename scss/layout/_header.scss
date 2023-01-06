@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7.5rem;
+
+    .logo{
+        height: 3.125rem;
+    }
+
+    h1{
+        font-size: 2.25rem;
+        color: $color-3;
+    }
+}

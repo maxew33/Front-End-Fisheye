@@ -1,1 +1,6 @@
-@import './base/reset';
+@import './base/reset', './utils/variables', './utils/mixins', './layout/header', './pages/homepage';
+
+body{
+    font-family: $fontfam;
+    padding: 2.5rem 6.25rem;
+}

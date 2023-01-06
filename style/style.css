@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
 html,
 body,
 div,
@@ -133,4 +134,78 @@ a,
 a:visited {
   color: inherit;
   text-decoration: none;
+}
+
+/* colors */
+/* font-family */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7.5rem;
+}
+.header .logo {
+  height: 3.125rem;
+}
+.header h1 {
+  font-size: 2.25rem;
+  color: #901c1c;
+}
+
+#main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 40rem;
+}
+
+.photographer-card {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.photographer-card .photographer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.photographer-card .photographer-link .photographer-portrait {
+  height: 12.5rem;
+  width: 12.5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1.75rem;
+}
+.photographer-card .photographer-link .photographer-name {
+  color: #d3573c;
+  font-size: 2.25rem;
+}
+.photographer-card .photographer-infos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: 0.25rem 0 1.75rem;
+  line-height: 1.15rem;
+}
+.photographer-card .photographer-infos .photographer-place {
+  font-size: 0.8rem;
+  color: #d3573c;
+}
+.photographer-card .photographer-infos .photographer-tagline {
+  font-size: 0.65rem;
+  font-weight: bold;
+}
+.photographer-card .photographer-infos .photographer-price {
+  font-size: 0.6rem;
+  color: #525252;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  padding: 2.5rem 6.25rem;
 }/*# sourceMappingURL=style.css.map */

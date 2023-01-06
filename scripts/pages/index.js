@@ -3,7 +3,7 @@ import PhotographerCard from "../templates/photographerCard.js"
 import init from "../utils/filter.js"
 
 const api = new MyApi('./../../data/photographers.json'),
-    photographersContainer = document.querySelector('.photographer-section')
+    photographersContainer = document.getElementById('main')
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),
@@ -18,7 +18,7 @@ async function main() {
         const myCard = card.createPhotographerCard()
         console.log(myCard)
         photographersContainer.appendChild(myCard)
-    });
+    })
 
     init()
 
