@@ -7,12 +7,10 @@ export default class PhotographerGallery {
     }
 
     createPhotographerGallery() {
-        const $container = document.createElement('div')
+        const $container = document.createElement('article')
         $container.classList.add('photographer-image-container')
 
         const media = new MediaFactory(this._gallery, this._photographer)
-
-        console.log('gallery', this._gallery)
 
         // createTag method get the media type and create img or video tag 
         const cardMedia = media.createTag()

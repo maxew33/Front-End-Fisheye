@@ -258,7 +258,23 @@ a:visited {
   border-radius: 50%;
 }
 
-/* SORTING BUTTON */
+/* FILTER */
+.filter-container {
+  margin: 1rem 0;
+}
+.filter-container * {
+  font-size: 1.15rem;
+}
+.filter-container #filter {
+  background: #901c1c;
+  color: white;
+}
+.filter-container #filter > * {
+  display: inline-block;
+  color: red;
+  border-top: 2px solid white;
+}
+
 /* GALLERY */
 .photographer-gallery {
   display: grid;
@@ -335,6 +351,23 @@ a:visited {
 }
 .photographer-carousel .carousel-next {
   right: 10vw;
+}
+
+/* NUMBERS (likes + price) */
+.photographer-numbers {
+  position: fixed;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  padding: 1.5rem 2rem;
+  gap: 4rem;
+  top: 100vh;
+  left: 95vw;
+  transform: translate(-100%, -100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #d3573c;
+  border-radius: 5px 5px 0 0;
 }
 
 /* FORM MODAL */

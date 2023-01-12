@@ -18,23 +18,34 @@
   </header>
 
   <main id="main">
-    <div class="photographer-banner"></div>
-    <div class="sorting-buttons">
-      <ul class="sorting-buttons-container">
-        <li class="sorting-button" data-sorting-value="title">nom</li>
-        <li class="sorting-button" data-sorting-value="likes">like</li>
-        <li class="sorting-button" data-sorting-value="date">date</li>
-      </ul>
+
+    <section class="photographer-banner"></section>
+
+    <div class="filter-container">
+      <label for="filter">Trier par</label>
+      <select name="filter" id="filter">
+        <option value="likes" class="sorting-button" data-sorting-value="title">Popularité</option>
+        <option value="date">Date</option>
+        <option value="title">Titre</option>
+      </select>
     </div>
-    <div class="photographer-gallery"></div>
-    <div class="photographer-carousel">
+
+    <section class="photographer-gallery"></section>
+
+    <div class="photographer-numbers">
+      <span class="photographer-likes"><span class="photographer-likes-qty"></span>❤</span>
+      <span class="photographer-price"><span class="photographer-price-value"></span>€ / jour</span>
+    </div>
+
+    <section class="photographer-carousel">
       <div class="images-overview">
         <div class="images-container"></div>
       </div>
       <button class="carousel-close carousel-btn">X</button>
       <button class="carousel-prev carousel-direction-btn carousel-btn">prev</button>
       <button class="carousel-next carousel-direction-btn carousel-btn">next</button>
-    </div>
+    </section>
+
   </main>
 
   <div id="contact_modal">

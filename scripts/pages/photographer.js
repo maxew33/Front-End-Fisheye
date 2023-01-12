@@ -7,10 +7,13 @@ const api = new MyApi('./../../data/photographers.json'),
     gallery = document.querySelector('.photographer-gallery'),
     carousel = document.querySelector('.photographer-carousel'),
     carouselImagesContainer = document.querySelector('.images-container'),
+    photographerLikesQty = document.querySelector('.photographer-likes-qty'),
+    photographerPriceValue = document.querySelector('.photographer-price-value'),
     body = document.querySelector('body')
 
 let imageIndex = 0, //index of the current photo for the carousel
-    imageQty = 0
+    imageQty = 0,
+    photographerLikes = 0
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),
@@ -22,15 +25,14 @@ async function main() {
 
     const myPhotographer = photographersInfos.filter(photographer => {
         return photographer['id'] === photographerId
-    })
-
+    })[0]
 
     //creation of the banner for the selected photograph
-    const photographerInfos = new PhotographerBanner(myPhotographer[0])
+    const photographerInfos = new PhotographerBanner(myPhotographer)
     const banner = photographerInfos.createPhotographerBanner()
     mainContainer.innerHTML = banner
-
-    // get the photographer's media
+    
+    //get the photographer's media
     const myMedia = mediaInfos.filter(media => {
         return media['photographerId'] === photographerId
     }
@@ -38,14 +40,11 @@ async function main() {
 
     imageQty = myMedia.length
 
-    console.log(imageQty)
-
     const fillGallery = (sortingValue) => {
-
         //remove content from the gallery
         gallery.innerHTML = ''
         carouselImagesContainer.innerHTML = ''
-        
+
         // get the data filtered
         myMedia.sort(function (a, b) {
             if (a[sortingValue] < b[sortingValue]) {
@@ -59,9 +58,12 @@ async function main() {
 
         //fill the gallery with the filtered data
         myMedia.forEach(media => {
-            const photographerGallery = new PhotographerGallery(media, myPhotographer[0])
+
+            photographerLikes += media.likes
+            console.log(media.likes)
+            const photographerGallery = new PhotographerGallery(media, myPhotographer)
             const img = photographerGallery.createPhotographerGallery(),
-                imgClone = img.cloneNode(true) // clone the img const in order to uyse it a second time
+                imgClone = img.cloneNode(true) // clone the img const in order to use it a second time
 
             gallery.appendChild(img)
             carouselImagesContainer.appendChild(imgClone)
@@ -70,19 +72,18 @@ async function main() {
 
         const myImages = [...document.querySelectorAll('.photographer-gallery .photographer-media')]
 
-        console.log(myImages)
-
         //when I click, open the carousel wtih the right index
         myImages.forEach((image, idx) =>
             image.addEventListener('click', () => {
                 console.log(myMedia, idx)
                 carousel.style.display = 'grid'
-                body.style.overflow='hidden'
+                body.style.overflow = 'hidden'
             }))
     }
 
     fillGallery('title')
 
+    //filters 1) with ul / li list - 2) whit a select tag
     const sortingButtons = document.querySelectorAll('.sorting-button')
 
     sortingButtons.forEach(button => button.addEventListener('click', e => {
@@ -90,16 +91,12 @@ async function main() {
         fillGallery(e.target.dataset.sortingValue)
     }))
 
-    /* add my utils js after everything is loaded */
-    /*const script = document.createElement('script')
-    script.src = "./scripts/utils/filter.js"
-    script.async = true
-    document.head.appendChild(script)
+    document.getElementById('filter').addEventListener('change', e=>fillGallery(e.target.value))
 
-    const script2 = document.createElement('script')
-    script2.src = "./scripts/utils/contactForm.js"
-    script2.async = true
-    document.head.appendChild(script2)*/
+    
+    //Display photographers infos : likes and price
+    photographerLikesQty.textContent = photographerLikes
+    photographerPriceValue.textContent = myPhotographer.price
 
 
     //Contact modal
@@ -135,9 +132,11 @@ closeCarousel.addEventListener('click', () => {
 
 carouselBtns.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
+        let prevIndex = imageIndex
         imageIndex += (idx * 2 - 1)
         console.log(imageIndex)
-        imageIndex < 0 || imageIndex > imageQty ? console.log('caca') : console.log('ok')
+        if (imageIndex < 0 || imageIndex > imageQty - 1) { (imageIndex = prevIndex) }
+        console.log(imageIndex)
         document.documentElement.style.setProperty('--carousel-idx', imageIndex)
     })
 })

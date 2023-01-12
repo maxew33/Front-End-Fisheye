@@ -52,7 +52,22 @@
     }
 }
 
-/* SORTING BUTTON */
+/* FILTER */
+.filter-container{
+     * {font-size: 1.15rem;}
+     margin: 1rem 0;
+
+    #filter{
+        background: $bg-1;
+        color: white;
+        >*{
+            display: inline-block;
+            color: red;
+                border-top: 2px solid white;
+            }
+        }
+    }
+
 
 /* GALLERY */
 .photographer-gallery {
@@ -111,7 +126,7 @@
         }
     }
 
-    .carousel-btn{
+    .carousel-btn {
         position: absolute;
         color: $color-3;
         font-size: 3rem;
@@ -120,23 +135,41 @@
         background: none;
     }
 
-    .carousel-close{
-        top: 10vh; 
+    .carousel-close {
+        top: 10vh;
         right: 10vw;
     }
 
-    .carousel-direction-btn{
+    .carousel-direction-btn {
         top: 50%;
         transform: translateY(-50%);
     }
 
-    .carousel-prev{
+    .carousel-prev {
         left: 10vw;
     }
 
-    .carousel-next{
+    .carousel-next {
         right: 10vw;
     }
+}
+
+/* NUMBERS (likes + price) */
+
+.photographer-numbers {
+    position: fixed;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    padding: 1.5rem 2rem;
+    gap: 4rem;
+    top: 100vh;
+    left: 95vw;
+    transform: translate(-100%, -100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: $bg-2;
+    border-radius: 5px 5px 0 0;
 }
 
 /* FORM MODAL */
