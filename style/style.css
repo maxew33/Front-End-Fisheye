@@ -295,8 +295,15 @@ a:visited {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.photographer-gallery .photographer-image-infos * {
   font-size: 1.5rem;
   color: #901c1c;
+}
+.photographer-gallery .photographer-image-infos .photographer-image-likes-increase {
+  background: inherit;
+  border: none;
+  cursor: pointer;
 }
 
 /* LIGHTBOX MODAL (carousel) */
@@ -312,23 +319,25 @@ a:visited {
   display: none;
   place-content: center;
 }
-.photographer-carousel .images-overview {
-  width: 70vw;
-  height: 90vw;
-  overflow: hidden;
-}
-.photographer-carousel .images-overview .images-container {
+.photographer-carousel .media-container {
   height: 90vw;
   display: flex;
   align-items: center;
   transition: 0.5s transform ease-in-out;
   transform: translate(calc(var(--carousel-idx) * -70vw));
 }
-.photographer-carousel .images-overview .images-container .photographer-media {
+.photographer-carousel .media-container .photographer-media {
   width: 70vw;
   height: 80vw;
   -o-object-fit: contain;
      object-fit: contain;
+}
+.photographer-carousel .media-title {
+  position: absolute;
+  background: #fff;
+  top: 90vh;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .photographer-carousel .carousel-btn {
   position: absolute;

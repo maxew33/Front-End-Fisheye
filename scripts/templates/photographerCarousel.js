@@ -1,14 +1,14 @@
 import MediaFactory from "../factories/mediaFactory.js"
 
-export default class PhotographerGallery {
+export default class PhotographerCarousel {
     constructor(gallery, photographer) {
         this._photographer = photographer.name.split(' ')[0]
         this._gallery = gallery
     }
 
     createPhotographerGallery() {
-        const $container = document.createElement('article')
-        $container.classList.add('photographer-image-container')
+        const $container = document.createElement('div')
+        $container.classList.add('photographer-media-container')
 
         const media = new MediaFactory(this._gallery, this._photographer)
 
