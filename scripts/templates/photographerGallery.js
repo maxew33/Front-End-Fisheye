@@ -13,7 +13,7 @@ export default class PhotographerGallery {
         const media = new MediaFactory(this._gallery, this._photographer)
 
         // createTag method get the media type and create img or video tag 
-        const cardMedia = media.createTag()
+        const cardMedia = media.createTag('min')
 
         const cardInfos = `
             <div class="photographer-image-infos">

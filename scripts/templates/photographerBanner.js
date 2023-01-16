@@ -3,11 +3,14 @@ export default class PhotographerBanner{
         this.photographer = photographer
     }
 
+/**
+ * It creates a banner for a photographer.
+ * 
+ * The function is called in the following way:
+ * @returns {string} cardContent - photographer infos for homepage
+ */
     createPhotographerBanner() {
         
-        /*const $container = document.createElement('div')
-        $container.classList.add('photograph-header')*/
-
         const { name, portrait, city, country, tagline } = this.photographer
 
         const cardContent = `
@@ -26,7 +29,6 @@ export default class PhotographerBanner{
             <img src="./assets/photographers/${portrait}" class="photographer-portrait" alt="${name}">
             `
 
-        //$container.innerHTML = cardContent
         return cardContent
     }
 }

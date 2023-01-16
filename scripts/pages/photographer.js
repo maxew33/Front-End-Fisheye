@@ -9,14 +9,17 @@ const api = new MyApi('./../../data/photographers.json'),
     carousel = document.querySelector('.photographer-carousel'),
     carouselMediaContainer = document.querySelector('.media-container'),
     carouselMediaTitle = document.querySelector('.media-title'),
+    contactModal = document.getElementById('contact_modal'),
+    photographerNameModal = document.querySelector('.photographer-name'),
     photographerLikesQty = document.querySelector('.photographer-likes-qty'),
     photographerPriceValue = document.querySelector('.photographer-price-value'),
     body = document.querySelector('body')
 
 let mediaIndex = 0, //index of the current photo for the carousel
     mediaQty = 0,
-    photographerLikes = 0,
-    photographerName = ""
+    photographerLikes = 0, // sum of the likes
+    photographerName = "",
+    lastFocusedElt = 0 // index of the last focused element within the focus trap
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),
@@ -97,7 +100,7 @@ async function main() {
                 openCarousel(idx)
             })
             image.addEventListener('keydown', e => {
-                if (e.keyCode === 13) {
+                if (e.key === 'Enter') {
                     openCarousel(idx)
                 }
             })
@@ -109,14 +112,44 @@ async function main() {
             body.style.overflow = 'hidden'
             mediaIndex = idx
             displayCarouselMedia(idx)
+            window.addEventListener('keydown', focusTrap)
+            console.log(carouselBtns)
+            carouselBtns[lastFocusedElt].focus()
         }
     }
 
     fillGallery('title')
 
+    //carousel logic    
+    const closeCarouselBtn = document.querySelector('.carousel-close'),
+        carouselDirectionsBtns = [...document.querySelectorAll('.carousel-direction-btn')],
+        carouselBtns = [...carouselDirectionsBtns, closeCarouselBtn]
+
+    console.log(carouselBtns)
+
     const closeCarousel = () => {
         carousel.style.display = 'none'
         body.style.overflow = 'auto'
+        lastFocusedElt = 0
+        window.removeEventListener('keydown', focusTrap)
+    }
+
+    const focusTrap = (e) => {
+        let newFocusedElt
+        console.log(e)
+        e.preventDefault()
+        e.key === 'Escape' && closeCarousel()
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                lastFocusedElt === 0 ? newFocusedElt = carouselBtns.length - 1 : newFocusedElt = lastFocusedElt - 1
+            }
+            else {
+                lastFocusedElt === carouselBtns.length - 1 ? newFocusedElt = 0 : newFocusedElt = lastFocusedElt + 1
+                console.log(newFocusedElt)
+            }
+            carouselBtns[newFocusedElt].focus()
+            lastFocusedElt = newFocusedElt
+        }
     }
 
     //displaying carousel media
@@ -124,31 +157,34 @@ async function main() {
         const media = new MediaFactory(myMedia[idx], photographerName)
         carouselMediaTitle.innerText = myMedia[idx].title
         carouselMediaContainer.innerHTML = media.createTag()
-
-        window.addEventListener('keydown', e => {
-            e.keyCode === 27 && closeCarousel()
-            console.log(e)
-        })
     }
 
     //carousel interactions
-    const closeCarouselBtn = document.querySelector('.carousel-close'),
-        carouselBtns = [...document.querySelectorAll('.carousel-direction-btn')]
 
     closeCarouselBtn.addEventListener('click', () => {
         closeCarousel()
     })
+    closeCarouselBtn.addEventListener('keydown', e => {
+        e.key === 'Enter' && closeCarousel()
+    })
 
-    carouselBtns.forEach((btn, idx) => {
+    carouselDirectionsBtns.forEach((btn, idx) => {
         btn.addEventListener('click', () => {
-            mediaIndex += (idx * 2 - 1)
-            mediaIndex > mediaQty - 1 && (mediaIndex = 0)
-            mediaIndex < 0 && (mediaIndex = mediaQty - 1)
-            displayCarouselMedia(mediaIndex)
+            carouselBtnNav(idx)
+        })
+        btn.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                carouselBtnNav(idx)
+            }
         })
     })
 
-
+    function carouselBtnNav(idx) {
+        mediaIndex += (idx * 2 - 1)
+        mediaIndex > mediaQty - 1 && (mediaIndex = 0)
+        mediaIndex < 0 && (mediaIndex = mediaQty - 1)
+        displayCarouselMedia(mediaIndex)
+    }
 
 
     //filters 1) with ul / li list - 2) whit a select tag
@@ -161,17 +197,16 @@ async function main() {
 
     document.getElementById('filter').addEventListener('change', e => fillGallery(e.target.value))
 
-
     //Display photographers infos : likes and price
     photographerLikesQty.textContent = photographerLikes
     photographerPriceValue.textContent = myPhotographer.price
 
 
     //Contact modal
-    const displayModal = [...document.querySelectorAll('.display-modal-button')],
-        contactModal = document.getElementById('contact_modal')
-
+    const displayModal = [...document.querySelectorAll('.display-modal-button')]
     let modalDisplayed = "block"
+
+    photographerNameModal.textContent = myPhotographer.name
 
     displayModal.forEach(btn => {
         console.log('ccc')
