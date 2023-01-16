@@ -2,20 +2,21 @@ import MyApi from "../api/Api.js"
 import PhotographerGallery from "../templates/photographerGallery.js"
 import PhotographerBanner from "../templates/photographerBanner.js"
 import MediaFactory from "../factories/mediaFactory.js"
+import focusTrap from "../utils/focusTrap.js"
 
 const api = new MyApi('./../../data/photographers.json'),
     mainContainer = document.querySelector('.photographer-banner'),
     gallery = document.querySelector('.photographer-gallery'),
-    carousel = document.querySelector('.photographer-carousel'),
-    carouselMediaContainer = document.querySelector('.media-container'),
-    carouselMediaTitle = document.querySelector('.media-title'),
+    lightbox = document.querySelector('.photographer-lightbox'),
+    lightboxMediaContainer = document.querySelector('.media-container'),
+    lightboxMediaTitle = document.querySelector('.media-title'),
     contactModal = document.getElementById('contact_modal'),
     photographerNameModal = document.querySelector('.photographer-name'),
     photographerLikesQty = document.querySelector('.photographer-likes-qty'),
     photographerPriceValue = document.querySelector('.photographer-price-value'),
     body = document.querySelector('body')
 
-let mediaIndex = 0, //index of the current photo for the carousel
+let mediaIndex = 0, //index of the current photo for the lightbox
     mediaQty = 0,
     photographerLikes = 0, // sum of the likes
     photographerName = "",
@@ -51,7 +52,6 @@ async function main() {
     const fillGallery = (sortingValue) => {
         //remove content from the gallery
         gallery.innerHTML = ''
-        // carouselImagesContainer.innerHTML = ''
 
         // get the data filtered
         myMedia.sort(function (a, b) {
@@ -75,7 +75,7 @@ async function main() {
             gallery.appendChild(img)
         })
 
-        //increasing / decreasingh by 1 likes when clicking on the heart
+        //increasing / decreasing by 1 likes when clicking on the heart
         const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')]
         const mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')]
         const likesIncreased = [] // know if the media is already liked
@@ -94,113 +94,77 @@ async function main() {
         // open the lightbox
         const myImages = [...document.querySelectorAll('.photographer-gallery .photographer-media')]
 
-        //when I click, open the carousel wtih the right index
+        //when I click, open the lightbox with the right index
         myImages.forEach((image, idx) => {
             image.addEventListener('click', () => {
-                openCarousel(idx)
+                openlightbox(idx)
             })
             image.addEventListener('keydown', e => {
                 if (e.key === 'Enter') {
-                    openCarousel(idx)
+                    openlightbox(idx)
                 }
             })
         })
 
-        //open the carousel
-        const openCarousel = (idx) => {
-            carousel.style.display = 'grid'
+        //open the lightbox
+        function openlightbox(idx) {
+            lightbox.style.display = 'grid'
             body.style.overflow = 'hidden'
             mediaIndex = idx
-            displayCarouselMedia(idx)
-            window.addEventListener('keydown', focusTrap)
-            console.log(carouselBtns)
-            carouselBtns[lastFocusedElt].focus()
+            displaylightboxMedia(idx)
+            window.addEventListener('keydown', lightboxNavigation)
+            lightboxBtns[lastFocusedElt].focus()
         }
     }
 
     fillGallery('title')
 
-    //carousel logic    
-    const closeCarouselBtn = document.querySelector('.carousel-close'),
-        carouselDirectionsBtns = [...document.querySelectorAll('.carousel-direction-btn')],
-        carouselBtns = [...carouselDirectionsBtns, closeCarouselBtn]
+    //lightbox logic    
+    const closelightboxBtn = document.querySelector('.lightbox-close'),
+        lightboxDirectionsBtns = [...document.querySelectorAll('.lightbox-direction-btn')],
+        lightboxBtns = [...lightboxDirectionsBtns, closelightboxBtn]
 
-    console.log(carouselBtns)
-
-    const closeCarousel = () => {
-        carousel.style.display = 'none'
-        body.style.overflow = 'auto'
-        lastFocusedElt = 0
-        window.removeEventListener('keydown', focusTrap)
-    }
-
-    const focusTrap = (e) => {
-        let newFocusedElt
-        console.log(e)
+    const lightboxNavigation = e => {
         e.preventDefault()
-        e.key === 'Escape' && closeCarousel()
-        if (e.key === 'Tab') {
-            if (e.shiftKey) {
-                lastFocusedElt === 0 ? newFocusedElt = carouselBtns.length - 1 : newFocusedElt = lastFocusedElt - 1
-            }
-            else {
-                lastFocusedElt === carouselBtns.length - 1 ? newFocusedElt = 0 : newFocusedElt = lastFocusedElt + 1
-                console.log(newFocusedElt)
-            }
-            carouselBtns[newFocusedElt].focus()
-            lastFocusedElt = newFocusedElt
-        }
+        e.key === 'Escape' && closeModal(lightbox, lightboxNavigation)
+        e.key === 'ArrowLeft' && lightboxBtnNav(0)
+        e.key === 'ArrowRight' && lightboxBtnNav(1)
+        lastFocusedElt = focusTrap(e, lastFocusedElt, lightboxBtns)
     }
 
-    //displaying carousel media
-    const displayCarouselMedia = (idx) => {
+    //displaying lightbox media
+    const displaylightboxMedia = (idx) => {
         const media = new MediaFactory(myMedia[idx], photographerName)
-        carouselMediaTitle.innerText = myMedia[idx].title
-        carouselMediaContainer.innerHTML = media.createTag()
+        lightboxMediaTitle.innerText = myMedia[idx].title
+        lightboxMediaContainer.innerHTML = media.createTag()
     }
 
-    //carousel interactions
+    //lightbox interactions
 
-    closeCarouselBtn.addEventListener('click', () => {
-        closeCarousel()
+    closelightboxBtn.addEventListener('click', () => {
+        closeModal(lightbox, lightboxNavigation)
     })
-    closeCarouselBtn.addEventListener('keydown', e => {
-        e.key === 'Enter' && closeCarousel()
+    closelightboxBtn.addEventListener('keydown', e => {
+        e.key === 'Enter' && closeModal(lightbox, lightboxNavigation)
     })
 
-    carouselDirectionsBtns.forEach((btn, idx) => {
+    lightboxDirectionsBtns.forEach((btn, idx) => {
         btn.addEventListener('click', () => {
-            carouselBtnNav(idx)
+            lightboxBtnNav(idx)
         })
         btn.addEventListener('keydown', e => {
             if (e.key === 'Enter') {
-                carouselBtnNav(idx)
+                lightboxBtnNav(idx)
             }
         })
     })
 
-    function carouselBtnNav(idx) {
+    function lightboxBtnNav(idx) {
         mediaIndex += (idx * 2 - 1)
         mediaIndex > mediaQty - 1 && (mediaIndex = 0)
         mediaIndex < 0 && (mediaIndex = mediaQty - 1)
-        displayCarouselMedia(mediaIndex)
+        displaylightboxMedia(mediaIndex)
     }
-
-
-    //filters 1) with ul / li list - 2) whit a select tag
-    const sortingButtons = document.querySelectorAll('.sorting-button')
-
-    sortingButtons.forEach(button => button.addEventListener('click', e => {
-        console.log('clic on btn', e.target.dataset.sortingValue)
-        fillGallery(e.target.dataset.sortingValue)
-    }))
-
-    document.getElementById('filter').addEventListener('change', e => fillGallery(e.target.value))
-
-    //Display photographers infos : likes and price
-    photographerLikesQty.textContent = photographerLikes
-    photographerPriceValue.textContent = myPhotographer.price
-
 
     //Contact modal
     const displayModal = [...document.querySelectorAll('.display-modal-button')]
@@ -215,8 +179,31 @@ async function main() {
             contactModal.style.display = modalDisplayed
             modalDisplayed = modalDisplayed === 'block' ? 'none' : 'block'
         })
-
     })
+
+
+    // closing the modals
+
+    const closeModal = (modal, focusTrap) => {
+        modal.style.display = 'none'
+        body.style.overflow = 'auto'
+        lastFocusedElt = 0
+        window.removeEventListener('keydown', focusTrap)
+    }
+
+    //filters 1) with ul / li list - 2) whit a select tag
+    const sortingButtons = document.querySelectorAll('.sorting-button')
+
+    sortingButtons.forEach(button => button.addEventListener('click', e => {
+        console.log('clic on btn', e.target.dataset.sortingValue)
+        fillGallery(e.target.dataset.sortingValue)
+    }))
+
+    document.getElementById('filter').addEventListener('change', e => fillGallery(e.target.value))
+
+    //Display photographers infos : likes and price
+    photographerLikesQty.textContent = photographerLikes
+    photographerPriceValue.textContent = myPhotographer.price
 
 }
 

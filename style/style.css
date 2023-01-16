@@ -205,10 +205,6 @@ a:visited {
   color: #525252;
 }
 
-:root {
-  --carousel-idx: 0;
-}
-
 /* BANNER */
 .photographer-banner {
   display: flex;
@@ -306,8 +302,8 @@ a:visited {
   cursor: pointer;
 }
 
-/* LIGHTBOX MODAL (carousel) */
-.photographer-carousel {
+/* LIGHTBOX MODAL (lightbox) */
+.photographer-lightbox {
   position: fixed;
   top: 0;
   left: 0;
@@ -319,27 +315,27 @@ a:visited {
   display: none;
   place-content: center;
 }
-.photographer-carousel .media-container {
+.photographer-lightbox .media-container {
   height: 90vw;
   display: flex;
   align-items: center;
   transition: 0.5s transform ease-in-out;
-  transform: translate(calc(var(--carousel-idx) * -70vw));
+  transform: translate(calc(var(--lightbox-idx) * -70vw));
 }
-.photographer-carousel .media-container .photographer-media {
+.photographer-lightbox .media-container .photographer-media {
   width: 70vw;
   height: 80vw;
   -o-object-fit: contain;
      object-fit: contain;
 }
-.photographer-carousel .media-title {
+.photographer-lightbox .media-title {
   position: absolute;
   background: #fff;
   top: 90vh;
   left: 50%;
   transform: translateX(-50%);
 }
-.photographer-carousel .carousel-btn {
+.photographer-lightbox .lightbox-btn {
   position: absolute;
   color: #901c1c;
   font-size: 3rem;
@@ -347,18 +343,18 @@ a:visited {
   cursor: pointer;
   background: none;
 }
-.photographer-carousel .carousel-close {
+.photographer-lightbox .lightbox-close {
   top: 10vh;
   right: 10vw;
 }
-.photographer-carousel .carousel-direction-btn {
+.photographer-lightbox .lightbox-direction-btn {
   top: 50%;
   transform: translateY(-50%);
 }
-.photographer-carousel .carousel-prev {
+.photographer-lightbox .lightbox-prev {
   left: 10vw;
 }
-.photographer-carousel .carousel-next {
+.photographer-lightbox .lightbox-next {
   right: 10vw;
 }
 

@@ -1,7 +1,3 @@
-:root {
-    --carousel-idx: 0;
-}
-
 /* BANNER */
 
 .photographer-banner {
@@ -106,9 +102,9 @@
 }
 
 
-/* LIGHTBOX MODAL (carousel) */
+/* LIGHTBOX MODAL (lightbox) */
 
-.photographer-carousel {
+.photographer-lightbox {
     position: fixed;
     top: 0;
     left: 0;
@@ -125,7 +121,7 @@
         display: flex;
         align-items: center;
         transition: .5s transform ease-in-out;
-        transform: translate(calc(var(--carousel-idx) * -70vw));
+        transform: translate(calc(var(--lightbox-idx) * -70vw));
 
         .photographer-media {
             width: 70vw;
@@ -142,7 +138,7 @@
         transform: translateX(-50%);
     }
 
-        .carousel-btn {
+        .lightbox-btn {
             position: absolute;
             color: $color-3;
             font-size: 3rem;
@@ -151,21 +147,21 @@
             background: none;
         }
 
-        .carousel-close {
+        .lightbox-close {
             top: 10vh;
             right: 10vw;
         }
 
-        .carousel-direction-btn {
+        .lightbox-direction-btn {
             top: 50%;
             transform: translateY(-50%);
         }
 
-        .carousel-prev {
+        .lightbox-prev {
             left: 10vw;
         }
 
-        .carousel-next {
+        .lightbox-next {
             right: 10vw;
         }
     }
