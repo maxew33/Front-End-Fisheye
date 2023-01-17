@@ -38,9 +38,9 @@
     </div>
 
     <section class="photographer-lightbox">
-        <div class="media-container">
-        </div>
-        <p class="media-title"></p>
+      <div class="media-container">
+      </div>
+      <p class="media-title"></p>
       <button class="lightbox-close lightbox-btn">X</button>
       <button class="lightbox-prev lightbox-direction-btn lightbox-btn">prev</button>
       <button class="lightbox-next lightbox-direction-btn lightbox-btn">next</button>
@@ -51,19 +51,20 @@
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi <br/><span class="photographer-name"></span></h2>
-        <img class="display-modal-button" src="assets/icons/close.svg" />
+        <h2>Contactez-moi <br /><span class="photographer-name"></span></h2>
+        <button class="contact-modal-focusable-elt"><img class="display-modal-button"
+            src="assets/icons/close.svg" /></button>
       </header>
       <form>
-          <label for="first-name">Prénom</label>
-          <input type="text" name="first-name" id="first-name">
-          <label for="last-name">Nom</label>
-          <input type="text" name="last-name" id="last-name">
-          <label for="mail">Email</label>
-          <input type="mail" name="mail" id="mail">
-          <label for="message">Votre message</label>
-          <textarea name="message" id="message"></textarea>
-        <button class="contact_button">Envoyer</button>
+        <label for="first-name">Prénom</label>
+        <input type="text" name="first-name" id="first-name" class="contact-modal-focusable-elt">
+        <label for="last-name">Nom</label>
+        <input type="text" name="last-name" id="last-name" class="contact-modal-focusable-elt">
+        <label for="mail">Email</label>
+        <input type="mail" name="mail" id="mail" class="contact-modal-focusable-elt">
+        <label for="message">Votre message</label>
+        <textarea name="message" id="message" class="contact-modal-focusable-elt"></textarea>
+        <button class="contact_button contact-modal-focusable-elt">Envoyer</button>
       </form>
     </div>
   </div>

@@ -167,19 +167,31 @@ async function main() {
     }
 
     //Contact modal
-    const displayModal = [...document.querySelectorAll('.display-modal-button')]
-    let modalDisplayed = "block"
+    const displayContactModal = [...document.querySelectorAll('.display-modal-button')],
+    contactModalBtns = [...document.querySelectorAll('.contact-modal-focusable-elt')]
+    let modalDisplayed = false
 
     photographerNameModal.textContent = myPhotographer.name
 
-    displayModal.forEach(btn => {
-        console.log('ccc')
+    displayContactModal.forEach(btn => {
         btn.addEventListener('click', () => {
-            console.log('ccc')
-            contactModal.style.display = modalDisplayed
-            modalDisplayed = modalDisplayed === 'block' ? 'none' : 'block'
+            modalDisplayed ? closeModal(contactModal, contactModalNavigation) : openContactModal()
+            modalDisplayed = !modalDisplayed
         })
     })
+
+    const openContactModal = () => {
+        contactModal.style.display = 'block'
+        body.style.overflow = 'hidden'
+        window.addEventListener('keydown', contactModalNavigation)
+        contactModalBtns[lastFocusedElt].focus()
+    }
+
+    const contactModalNavigation = e => {        
+        e.preventDefault()
+        e.key === 'Escape' && (closeModal(contactModal, contactModalNavigation), modalDisplayed = !modalDisplayed)
+        lastFocusedElt = focusTrap(e, lastFocusedElt, contactModalBtns)
+    }
 
 
     // closing the modals
@@ -208,4 +220,3 @@ async function main() {
 }
 
 main()
-
