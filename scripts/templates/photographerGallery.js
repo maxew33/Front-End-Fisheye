@@ -10,6 +10,13 @@ export default class PhotographerGallery {
         const $container = document.createElement('article')
         $container.classList.add('photographer-image-container')
 
+        const customDate = this._gallery.date.replace(/-/g, '')
+
+        $container.dataset.likes = this._gallery.likes
+        $container.dataset.title = this._gallery.title
+        $container.dataset.date = customDate
+
+
         const media = new MediaFactory(this._gallery, this._photographer)
 
         // createTag method get the media type and create img or video tag 
@@ -19,6 +26,7 @@ export default class PhotographerGallery {
             <div class="photographer-image-infos">
                 <span class="photographer-image-title">${this._gallery.title}</span>
                 <span class="photographer-image-likes">${this._gallery.likes}</span >&nbsp;<button class="photographer-image-likes-increase">❤</button>
+                <span>${this._gallery.date}</span>
             </div>
             `
 
@@ -28,3 +36,5 @@ export default class PhotographerGallery {
         return $container
     }
 }
+
+/* ENLEVER LES DATA ATTRIBUTES ???? */

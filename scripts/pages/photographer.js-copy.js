@@ -17,8 +17,7 @@ const api = new MyApi('./../../data/photographers.json'),
     contactModal = document.getElementById('contact_modal'),
     photographerNameModal = document.querySelector('.photographer-name'),
     photographerLikesQty = document.querySelector('.photographer-likes-qty'),
-    photographerPriceValue = document.querySelector('.photographer-price-value'),
-    galleryContent = [] // an array with the media
+    photographerPriceValue = document.querySelector('.photographer-price-value')
 
 let mediaIndex = 0, //index of the current photo for the lightbox
     mediaQty = 0,
@@ -53,89 +52,74 @@ async function main() {
 
     mediaQty = myMedia.length
 
-    //remove content from the gallery
-    gallery.innerHTML = ''
-    galleryContent.length = 0
+    const fillGallery = (sortingValue) => {
+        //remove content from the gallery
+        gallery.innerHTML = ''
 
-    //fill the galleryContent array 
-    myMedia.forEach(media => {
-        photographerLikes += media.likes
-        const photographerGallery = new PhotographerGallery(media, myPhotographer)
-        const img = photographerGallery.createPhotographerGallery()
-        galleryContent.push(img)
-    })
-
-    //fill the gallery with the medias and their infos
-    const fillGallery = (content) => content.forEach(elt => {
-        gallery.length = 0
-        gallery.appendChild(elt)
-    })
-
-    fillGallery(galleryContent)
-
-    /* filter the gallery : date / likes / title */
-    const filteredGallery = (filteredValue) => {
-
-        galleryContent.sort(function (a, b) {
-
-/* Converting the string to a number. */
-            let aValue = + a.dataset[filteredValue]            
-            let bValue = + b.dataset[filteredValue]
-
-/* Checking if the value is a number. If it is not, it is assigning the value to the variable. */
-            !aValue && (aValue = a.dataset[filteredValue])
-            !bValue && (bValue = b.dataset[filteredValue])
-
-            if (aValue < bValue) {
+        // get the data filtered
+        myMedia.sort(function (a, b) {
+            if (a[sortingValue] < b[sortingValue]) {
                 return -1
             }
-            if (aValue > bValue) {
+            if (a[sortingValue] > b[sortingValue]) {
                 return 1
             }
             return 0
-        }
-        )
-
-        fillGallery(galleryContent)
-    }
-
-    //increasing / decreasing by 1 likes when clicking on the heart
-    const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')]
-    const mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')]
-    const likesIncreased = [] // know if the media is already liked
-    likesIncreased.length = mediaQty
-    likesIncreased.fill(false)
-
-    mediaLikesBtn.forEach((like, index) => like.addEventListener('click', () => {
-        mediaLikesQty[index].textContent = myMedia[index].likes + (likesIncreased[index] ? 0 : 1)
-        photographerLikes += likesIncreased[index] ? -1 : 1
-        likesIncreased[index] = !likesIncreased[index]
-
-        photographerLikesQty.textContent = photographerLikes
-    }))
-
-    // lightbox logic
-    const myImages = [...document.querySelectorAll('.photographer-gallery .photographer-media')]
-
-    //when I click, open the lightbox with the right index
-    myImages.forEach((image, idx) => {
-        image.addEventListener('click', () => {
-            openlightbox(idx)
         })
-        image.addEventListener('keydown', e => {
-            if (e.key === 'Enter') {
+
+        //fill the gallery with the filtered data
+        myMedia.forEach(media => {
+
+            photographerLikes += media.likes
+            console.log(media.likes)
+            const photographerGallery = new PhotographerGallery(media, myPhotographer)
+            const img = photographerGallery.createPhotographerGallery()
+
+            gallery.appendChild(img)
+
+        })
+
+
+        //increasing / decreasing by 1 likes when clicking on the heart
+        const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')]
+        const mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')]
+        const likesIncreased = [] // know if the media is already liked
+        likesIncreased.length = mediaQty
+        likesIncreased.fill(false)
+
+        mediaLikesBtn.forEach((like, index) => like.addEventListener('click', () => {
+            mediaLikesQty[index].textContent = myMedia[index].likes + (likesIncreased[index] ? 0 : 1)
+            photographerLikes += likesIncreased[index] ? -1 : 1
+            likesIncreased[index] = !likesIncreased[index]
+
+            photographerLikesQty.textContent = photographerLikes
+        }))
+
+        // open the lightbox
+        const myImages = [...document.querySelectorAll('.photographer-gallery .photographer-media')]
+
+        //when I click, open the lightbox with the right index
+        myImages.forEach((image, idx) => {
+            image.addEventListener('click', () => {
                 openlightbox(idx)
-            }
+            })
+            image.addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    openlightbox(idx)
+                }
+            })
         })
-    })
 
-    //open the lightbox
-    function openlightbox(idx) {
-        openModal(lightbox, lightboxBtns, lightboxNavigation)
-        mediaIndex = idx
-        displaylightboxMedia(idx)
-        lastFocusedElt = 0
+        //open the lightbox
+        function openlightbox(idx) {
+            openModal(lightbox, lightboxBtns, lightboxNavigation)
+            mediaIndex = idx
+            displaylightboxMedia(idx)
+            lastFocusedElt = 0
+        }
     }
+
+    fillGallery('title')
 
     //lightbox logic    
     const closelightboxBtn = document.querySelector('.lightbox-close'),
@@ -158,6 +142,7 @@ async function main() {
     }
 
     //lightbox interactions
+
     closelightboxBtn.addEventListener('click', () => {
         closeModal(lightbox, lightboxNavigation)
     })
@@ -205,13 +190,13 @@ async function main() {
     }
 
     //filters 1) with ul / li list - 2) whit a select tag
-    /*const sortingButtons = document.querySelectorAll('.sorting-button')
+    const sortingButtons = document.querySelectorAll('.sorting-button')
 
     sortingButtons.forEach(button => button.addEventListener('click', e => {
         fillGallery(e.target.dataset.sortingValue)
-    }))*/
+    }))
 
-    document.getElementById('filter').addEventListener('change', e => filteredGallery(e.target.value))
+    document.getElementById('filter').addEventListener('change', e => fillGallery(e.target.value))
 
     //Display photographers infos : likes and price
     photographerLikesQty.textContent = photographerLikes
