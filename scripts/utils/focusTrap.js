@@ -21,6 +21,7 @@ export default function focusTrap(e, lastFocusedElt, focusableElements){
         focusableElements[newFocusedElt].focus()
         lastFocusedElt = newFocusedElt
         console.log('ok', lastFocusedElt)
+
     }
 
     return(lastFocusedElt)

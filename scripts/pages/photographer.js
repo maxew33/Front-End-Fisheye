@@ -100,19 +100,25 @@ async function main() {
     }
 
     //increasing / decreasing by 1 likes when clicking on the heart
-    const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')]
-    const mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')]
-    const likesIncreased = [] // know if the media is already liked
+    const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')],mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')],
+    heartCharacter = [...document.querySelectorAll('.photographer-image-likes-increase .heart-filled')],
+    heartBeams = [...document.querySelectorAll('.photographer-image-likes-increase .beams-container')],
+    likesIncreased = [] // know if the media is already liked
     likesIncreased.length = mediaQty
     likesIncreased.fill(false)
 
     mediaLikesBtn.forEach((like, index) => like.addEventListener('click', () => {
         mediaLikesQty[index].textContent = myMedia[index].likes + (likesIncreased[index] ? 0 : 1)
         photographerLikes += likesIncreased[index] ? -1 : 1
+
+        const animatedHeart = [heartCharacter[index], heartBeams[index]]
+        animatedHeart.forEach(elt => elt.classList.toggle('active'))
+        
         likesIncreased[index] = !likesIncreased[index]
 
         photographerLikesQty.textContent = photographerLikes
     }))
+
 
     // lightbox logic
     const myImages = [...document.querySelectorAll('.photographer-gallery .photographer-media')]
@@ -190,7 +196,15 @@ async function main() {
 
     photographerNameModal.textContent = myPhotographer.name
 
+    const contactModalNavigation = e => {
+        e.key === 'Tab' && e.preventDefault()
+        e.key === 'Escape' && (closeModal(contactModal, contactModalNavigation), modalDisplayed = !modalDisplayed)
+        console.log(e.target)
+        lastFocusedElt = focusTrap(e, lastFocusedElt, contactModalBtns)
+    }
+
     displayContactModal.forEach(btn => {
+
         btn.addEventListener('click', () => {
             modalDisplayed ? closeModal(contactModal, contactModalNavigation) : (openModal(contactModal, contactModalBtns, contactModalNavigation),
                 lastFocusedElt = 0)
@@ -198,20 +212,22 @@ async function main() {
         })
     })
 
-    const contactModalNavigation = e => {
-        e.preventDefault()
-        e.key === 'Escape' && (closeModal(contactModal, contactModalNavigation), modalDisplayed = !modalDisplayed)
-        lastFocusedElt = focusTrap(e, lastFocusedElt, contactModalBtns)
-    }
+    //filters 
 
-    //filters 1) with ul / li list - 2) whit a select tag
-    /*const sortingButtons = document.querySelectorAll('.sorting-button')
+    const filtersContainer = document.querySelector('.filters-container'),
+    filtersBtnContainerOpener = document.querySelector('.filters-btn-opener'),
+    filtersBtnContainerOpenerName = document.querySelector('.filters-btn-opener-name'),
+    filtersBtnContainer = document.querySelector('.filters-btn-container'),
+    filterButtons = document.querySelectorAll('.filter-btn')
 
-    sortingButtons.forEach(button => button.addEventListener('click', e => {
-        fillGallery(e.target.dataset.sortingValue)
-    }))*/
+     filtersBtnContainerOpener.addEventListener('click', () => filtersBtnContainer.classList.add('open'))
 
-    document.getElementById('filter').addEventListener('change', e => filteredGallery(e.target.value))
+    filterButtons.forEach(button => button.addEventListener('click', e => {
+        const filterSelected = e.target.innerText
+        filteredGallery(e.target.dataset.filterValue)
+        filtersBtnContainer.classList.remove('open')
+        filtersBtnContainerOpenerName.innerText = filterSelected
+    }))
 
     //Display photographers infos : likes and price
     photographerLikesQty.textContent = photographerLikes

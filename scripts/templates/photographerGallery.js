@@ -25,8 +25,25 @@ export default class PhotographerGallery {
         const cardInfos = `
             <div class="photographer-image-infos">
                 <span class="photographer-image-title">${this._gallery.title}</span>
-                <span class="photographer-image-likes">${this._gallery.likes}</span >&nbsp;<button class="photographer-image-likes-increase">❤</button>
-                <span>${this._gallery.date}</span>
+                <span class="photographer-image-likes">${this._gallery.likes}</span>
+                &nbsp;
+                <button class="photographer-image-likes-increase">
+                    <span class="heart heart-empty">
+                        <i class="fa-regular fa-heart"></i>
+                    </span>
+
+                    <span class="heart heart-filled">
+                        <i class="fa-solid fa-heart"></i>
+                    </span>
+
+                    <span class="beams-container">
+                        <span class="beam"></span>
+                        <span class="beam"></span>
+                        <span class="beam"></span>
+                        <span class="beam"></span>
+                        <span class="beam"></span>
+                    </span>
+                </button>
             </div>
             `
 

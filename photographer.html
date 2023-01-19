@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <title>Fisheye - photographe </title>
   <link rel="stylesheet" href="./style/style.css">
+  <script src="https://kit.fontawesome.com/a53308940c.js" crossorigin="anonymous">
+  </script>
   <script src="./scripts/pages/photographer.js" type="module"></script>
 </head>
 
@@ -21,20 +23,49 @@
 
     <section class="photographer-banner"></section>
 
-    <div class="filter-container">
-      <label for="filter">Trier par</label>
+    <div class="filters">
+      <!-- <label for="filter">Trier par</label>
       <select name="filter" id="filter">
         <option value="likes" class="sorting-button" data-sorting-value="title">Popularité</option>
         <option value="date">Date</option>
         <option value="title">Titre</option>
-      </select>
+      </select> -->
+      <span>Trier par </span>
+
+      <div class="filters-container">
+
+        <button class="filters-btn-opener">
+          <span class="filters-btn-opener-name">Date</span><i class="fa-solid fa-chevron-down"></i>
+        </button>
+
+        <div class="filters-btn-container">
+          <button class="filter-btn" data-filter-value="likes">
+            Popularité<span><i class="fa-solid fa-chevron-up"></i></span>
+          </button>
+          <button class="filter-btn" data-filter-value="date">
+            Date
+          </button>
+          <button class="filter-btn" data-filter-value="title">
+            Titre
+          </button>
+        </div>
+
+      </div>
+
+
     </div>
 
     <section class="photographer-gallery"></section>
 
     <div class="photographer-numbers">
-      <span class="photographer-likes"><span class="photographer-likes-qty"></span>❤</span>
-      <span class="photographer-price"><span class="photographer-price-value"></span>€ / jour</span>
+      <span class="photographer-likes">
+        <span class="photographer-likes-qty">
+        </span>
+        <i class="fa-solid fa-heart"></i>
+      </span>
+      <span class="photographer-price">
+        <span class="photographer-price-value"></span>€ / jour
+      </span>
     </div>
 
     <section class="photographer-lightbox">
@@ -52,7 +83,7 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi <br /><span class="photographer-name"></span></h2>
-        <button class="contact-modal-focusable-elt"><img class="display-modal-button"
+        <button class="contact-modal-focusable-elt display-modal-button"><img class=""
             src="assets/icons/close.svg" /></button>
       </header>
       <form>

@@ -1,0 +1,106 @@
+.photographer-image-likes-increase {
+        --scale: 0;
+        --beam-transY: 0rem;
+
+        position: relative;
+        cursor: pointer;
+        font-size: 1.25rem;
+        width: 1.5rem;
+
+        /*&:hover {
+            .heart-filled {
+                display: inline;
+            }
+
+            .beams-container {
+                display: inline;
+            }
+        }*/
+
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .heart-filled {
+            z-index: 10;
+            display: none;
+            transform: translate(-50%, -50%) scale(0);
+            animation: 0.25s beat-it linear forwards;
+            background: $bg-1;
+            background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: #0000;
+        }
+
+        .beams-container {
+            display: none;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .beam {
+            position: absolute;
+            width: 1px;
+            height: 0.25rem;
+
+            top: calc(50% - 0.2rem);
+            left: calc(50% - 1px);
+
+            @for $i from 1 through 7 {
+                &:nth-child(#{$i}) {
+                    transform: rotate(72deg * ($i + 0.5));
+                }
+            }
+
+            &::after {
+                content: "";
+                height: inherit;
+                width: inherit;
+                position: absolute;
+                background: $bg-1;
+                animation: 0.25s beam-spread 0.1s linear forwards;
+            }
+        }
+
+        
+        .active{
+            display: inline;
+        }
+
+    }
+
+
+@keyframes beat-it {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    80% {
+        transform: translate(-50%, -50%) scale(1.3);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes beam-spread {
+    0% {
+        opacity: 1;
+        transform: translateY(0rem);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(1rem);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+}

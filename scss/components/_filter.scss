@@ -1,0 +1,66 @@
+.filters {
+    * {
+        font-size: 1.15rem;
+    }
+
+    margin: 1rem 0;
+    width: 15rem;
+    @include flex-center-between;
+}
+
+.filters-container{
+    position: relative;
+    background: $bg-1;
+    border-radius: 5px;
+
+    .filters-btn-opener, .filters-btn-container .filter-btn{
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        @include flex-center-around;
+        height: 4.5rem;
+    }
+
+    .filters-btn-opener{
+        width: 10rem;
+        padding: 0 1rem;
+    }
+
+    .filters-btn-container{
+        background: inherit;
+        border-radius: inherit;
+        position: absolute;
+        top:0;
+        left:0;
+        transition: .25s height ease-in-out;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        overflow: hidden;
+
+        .filter-btn{
+            width: 8.5rem;
+            margin: 0 .75rem;
+            span{
+                pointer-events: none;
+            }
+            &:not(:nth-child(3)){
+                border-bottom: 2px solid white;
+            }
+        }
+        &.open{
+            display: flex;
+            // height: 0;
+            // animation: expand-filters-container .25s ease-in-out forwards;
+        }
+    }
+}
+
+@keyframes expand-filters-container {
+    to{
+        // height: 210px;
+    }
+    
+}
