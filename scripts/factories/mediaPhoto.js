@@ -1,20 +1,21 @@
 export default class Photo{
-    constructor(data, name) {        
-        this._name = name
-        this._filename = data.image
-        this._title = data.title
-        this._date = data.date
-        this._likes = data.likes
+    constructor(data) {                     
+        this._altText = data.altText
+        this._minAltText = data.minAltText
+        this._imagePath = data.imagePath
+        this._minImagePath = data.minImagePath
     }
 
     createTag(size){
-        let tagPart1 = `<img src="./assets/sample-photos/`
-        size === 'min' && (tagPart1 += 'min/')
-        const tagPart3 = `${this._name}/${this._filename}" class="photographer-media photographer-image" alt="${this._title}" tabindex="0" data-date=${this._date} data-likes=${this._likes} data-title=${this._title}>`
+        let tag = ''
 
-        const tag = tagPart1 + tagPart3
+        if(size === "min"){
+            tag = `<img src="${this._minImagePath}" class="photographer-media photographer-image" alt="${this._minAltText}" tabindex="0">`
+        }
+        else{
+            tag = `<img src="${this._imagePath}" class="photographer-media photographer-image" alt="${this._altText}" tabindex="0">`
+        }
+        
         return tag
     }
 }
-
-/* ENLEVER LES DATA ATTRIBUTES ???? */

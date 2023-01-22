@@ -1,23 +1,20 @@
 import MyApi from "../api/Api.js"
+import NewPhotographer from "../models/PhotographerConstructor.js"
 import PhotographerCard from "../templates/photographerCard.js"
 
 const api = new MyApi('./../../data/photographers.json'),
     photographersContainer = document.getElementById('main-homepage')
 
 async function main() {
-    const photographersInfos = await api.getPhotographers(),
-        mediaInfos = await api.getMedia()
+    const photographersInfos = await api.getPhotographers()
 
-    console.log('loaded index')
-    console.log(photographersInfos, mediaInfos)
-
-    photographersInfos.forEach(photographer => {
-        const card = new PhotographerCard(photographer)
-        console.log(photographer, card)
-        const myCard = card.createPhotographerCard()
-        console.log(myCard)
-        photographersContainer.appendChild(myCard)
-    })
+    photographersInfos
+        .map(photographer => new NewPhotographer(photographer))
+        .forEach(photographer => {
+            const card = new PhotographerCard(photographer)
+            const myCard = card.createPhotographerCard()
+            photographersContainer.appendChild(myCard)
+        })
 }
 
 main()

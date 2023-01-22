@@ -1,0 +1,60 @@
+.photographer-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fffd;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    place-content: center;
+
+    .photographer-lightbox-closeup {
+        width: 86.25vw;
+        height: 85vh;
+    }
+
+    .media-container {
+        height: inherit;
+        width: inherit;
+        display: grid;
+        place-content: center;
+
+        .photographer-media {
+            height: inherit;
+            width: 73vw;
+            object-fit: contain;
+        }
+    }
+
+    .media-title {
+        color: $color-3;
+        text-align: center;
+    }
+
+    .lightbox-btn {
+        position: absolute;
+        color: $color-3;
+        font-size: 3rem;
+        border: none;
+        cursor: pointer;
+        background: none;
+    }
+
+    .lightbox-close {
+        top: 10vh;
+        right: 10vw;
+    }
+
+    .lightbox-direction-btn {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .lightbox-prev {
+        left: 10vw;
+    }
+
+    .lightbox-next {
+        right: 10vw;
+    }
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -57,24 +57,26 @@
 
     <section class="photographer-gallery"></section>
 
-    <div class="photographer-numbers">
+    <p class="photographer-numbers">
       <span class="photographer-likes">
         <span class="photographer-likes-qty">
         </span>
         <i class="fa-solid fa-heart"></i>
       </span>
       <span class="photographer-price">
-        <span class="photographer-price-value"></span>€ / jour
+        <span class="photographer-price-value"></span>
       </span>
-    </div>
+    </p>
 
-    <section class="photographer-lightbox">
-      <div class="media-container">
+    <section class="photographer-lightbox" aria-label="Image closeup view">
+      <div class="photographer-lightbox-closeup">
+        <div class="media-container">
+        </div>
+        <button class="lightbox-close lightbox-btn" aria-label="Close dialog"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lightbox-prev lightbox-direction-btn lightbox-btn" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="lightbox-next lightbox-direction-btn lightbox-btn" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
       <p class="media-title"></p>
-      <button class="lightbox-close lightbox-btn">X</button>
-      <button class="lightbox-prev lightbox-direction-btn lightbox-btn">prev</button>
-      <button class="lightbox-next lightbox-direction-btn lightbox-btn">next</button>
     </section>
 
   </main>
@@ -82,19 +84,18 @@
   <div id="contact_modal">
     <div class="modal">
       <header>
-        <h2>Contactez-moi <br /><span class="photographer-name"></span></h2>
-        <button class="contact-modal-focusable-elt display-modal-button"><img class=""
-            src="assets/icons/close.svg" /></button>
+        <h1>Contactez-moi <br /><span class="photographer-name"></span></h1>
+        <button class="contact-modal-focusable-elt display-modal-button"><i class="fa-solid fa-xmark"></i></button>
       </header>
       <form>
         <label for="first-name">Prénom</label>
-        <input type="text" name="first-name" id="first-name" class="contact-modal-focusable-elt">
+        <input type="text" name="first-name" id="first-name" class="contact-modal-focusable-elt" required aria-labelledby="">
         <label for="last-name">Nom</label>
-        <input type="text" name="last-name" id="last-name" class="contact-modal-focusable-elt">
+        <input type="text" name="last-name" id="last-name" class="contact-modal-focusable-elt" required>
         <label for="mail">Email</label>
-        <input type="mail" name="mail" id="mail" class="contact-modal-focusable-elt">
+        <input type="mail" name="mail" id="mail" class="contact-modal-focusable-elt" required>
         <label for="message">Votre message</label>
-        <textarea name="message" id="message" class="contact-modal-focusable-elt"></textarea>
+        <textarea name="message" id="message" class="contact-modal-focusable-elt" required></textarea>
         <button class="contact_button contact-modal-focusable-elt">Envoyer</button>
       </form>
     </div>

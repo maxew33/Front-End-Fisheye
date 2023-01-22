@@ -57,6 +57,7 @@
 
     .photographer-image,
     .photographer-video {
+        cursor: pointer;
         width: 100%;
         aspect-ratio: 1/0.86;
         object-fit: cover;
@@ -79,71 +80,6 @@
         }
     }
 }
-
-
-/* LIGHTBOX MODAL (lightbox) */
-
-.photographer-lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #fff5;
-    backdrop-filter: blur(5px);
-    height: 100vh;
-    width: 100vw;
-    display: none;
-    place-content: center;
-
-
-    .media-container {
-        height: 90vw;
-        display: flex;
-        align-items: center;
-        transition: .5s transform ease-in-out;
-        transform: translate(calc(var(--lightbox-idx) * -70vw));
-
-        .photographer-media {
-            width: 70vw;
-            height: 80vw;
-            object-fit: contain;
-        }
-    }
-
-    .media-title{
-        position: absolute;
-        background: #fff;
-        top: 90vh;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-        .lightbox-btn {
-            position: absolute;
-            color: $color-3;
-            font-size: 3rem;
-            border: none;
-            cursor: pointer;
-            background: none;
-        }
-
-        .lightbox-close {
-            top: 10vh;
-            right: 10vw;
-        }
-
-        .lightbox-direction-btn {
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .lightbox-prev {
-            left: 10vw;
-        }
-
-        .lightbox-next {
-            right: 10vw;
-        }
-    }
 
     /* NUMBERS (likes + price) */
 

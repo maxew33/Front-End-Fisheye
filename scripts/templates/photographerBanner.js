@@ -11,13 +11,13 @@ export default class PhotographerBanner{
  */
     createPhotographerBanner() {
         
-        const { name, portrait, city, country, tagline } = this.photographer
+        const { name, portraitPath, city, country, tagline } = this.photographer
 
         const cardContent = `
         <div class="photographer-infos">
-            <h2 class="photographer-name">
+            <h1 class="photographer-name">
                 ${name}
-            </h2>
+            </h1>
             <span class="photographer-place">
                 ${city}, ${country}
             </span>
@@ -25,8 +25,8 @@ export default class PhotographerBanner{
                 ${tagline}
             </span>
         </div>
-        <button class="contact_button display-modal-button">Contactez-moi</button>
-            <img src="./assets/photographers/${portrait}" class="photographer-portrait" alt="${name}">
+        <button class="contact_button display-modal-button" aria-label="contact me">Contactez-moi</button>
+        <img src="${portraitPath}" class="photographer-portrait" alt="${name}">
             `
 
         return cardContent

@@ -1,33 +1,35 @@
 import MediaFactory from "../factories/mediaFactory.js"
 
 export default class PhotographerGallery {
-    constructor(gallery, photographer) {
-        this._photographer = photographer.name.split(' ')[0]
+    constructor(gallery) {
         this._gallery = gallery
     }
 
     createPhotographerGallery() {
+
+        console.log(this._gallery)
         const $container = document.createElement('article')
         $container.classList.add('photographer-image-container')
 
-        const customDate = this._gallery.date.replace(/-/g, '')
+        const { title, date, likes } = this._gallery
 
-        $container.dataset.likes = this._gallery.likes
-        $container.dataset.title = this._gallery.title
+        const customDate = date.replace(/-/g, '')
+
+        $container.dataset.likes = likes
+        $container.dataset.title = title
         $container.dataset.date = customDate
 
-
-        const media = new MediaFactory(this._gallery, this._photographer)
+        const media = new MediaFactory(this._gallery)
 
         // createTag method get the media type and create img or video tag 
         const cardMedia = media.createTag('min')
 
         const cardInfos = `
             <div class="photographer-image-infos">
-                <span class="photographer-image-title">${this._gallery.title}</span>
-                <span class="photographer-image-likes">${this._gallery.likes}</span>
+                <span class="photographer-image-title">${title}</span>
+                <span class="photographer-image-likes">${likes}</span>
                 &nbsp;
-                <button class="photographer-image-likes-increase">
+                <button class="photographer-image-likes-increase" aria-label="likes">
                     <span class="heart heart-empty">
                         <i class="fa-regular fa-heart"></i>
                     </span>

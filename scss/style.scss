@@ -1,6 +1,6 @@
-@import './base/reset', './utils/variables', './utils/mixins', './layout/header', './pages/homepage', './pages/photographer', './components/form', './utils/animations', './components/filter';
+@import './base/reset', './utils/variables', './utils/mixins', './utils/animations', './layout/header', './components/form', './components/filter', './components/lightbox', './pages/homepage', './pages/photographer';
 
-body{
+body {
     font-family: $fontfam;
     padding: 2.5rem 6.25rem;
 }

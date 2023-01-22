@@ -1,5 +1,8 @@
 import MyApi from "../api/Api.js"
 
+import NewPhotographer from "../models/PhotographerConstructor.js"
+import NewMedia from "../models/MediaConstructor.js"
+
 import PhotographerGallery from "../templates/photographerGallery.js"
 import PhotographerBanner from "../templates/photographerBanner.js"
 
@@ -23,7 +26,6 @@ const api = new MyApi('./../../data/photographers.json'),
 let mediaIndex = 0, //index of the current photo for the lightbox
     mediaQty = 0,
     photographerLikes = 0, // sum of the likes
-    photographerName = "",
     lastFocusedElt = 0 // index of the last focused element within the focus trap
 
 async function main() {
@@ -34,11 +36,9 @@ async function main() {
     const myURL = new URLSearchParams(document.location.search)
     const photographerId = parseInt(myURL.get("id"))
 
-    const myPhotographer = photographersInfos.filter(photographer => {
+    const myPhotographer = new NewPhotographer(photographersInfos.filter(photographer => {
         return photographer['id'] === photographerId
-    })[0]
-
-    photographerName = myPhotographer.name.split(' ')[0]
+    })[0])
 
     //creation of the banner for the selected photograph
     const photographerInfos = new PhotographerBanner(myPhotographer)
@@ -58,9 +58,11 @@ async function main() {
     galleryContent.length = 0
 
     //fill the galleryContent array 
-    myMedia.forEach(media => {
+    myMedia
+    .map(media => new NewMedia(media, photographerId))
+    .forEach(media => {
         photographerLikes += media.likes
-        const photographerGallery = new PhotographerGallery(media, myPhotographer)
+        const photographerGallery = new PhotographerGallery(media)
         const img = photographerGallery.createPhotographerGallery()
         galleryContent.push(img)
     })
@@ -73,37 +75,11 @@ async function main() {
 
     fillGallery(galleryContent)
 
-    /* filter the gallery : date / likes / title */
-    const filteredGallery = (filteredValue) => {
-
-        galleryContent.sort(function (a, b) {
-
-/* Converting the string to a number. */
-            let aValue = + a.dataset[filteredValue]            
-            let bValue = + b.dataset[filteredValue]
-
-/* Checking if the value is a number. If it is not, it is assigning the value to the variable. */
-            !aValue && (aValue = a.dataset[filteredValue])
-            !bValue && (bValue = b.dataset[filteredValue])
-
-            if (aValue < bValue) {
-                return -1
-            }
-            if (aValue > bValue) {
-                return 1
-            }
-            return 0
-        }
-        )
-
-        fillGallery(galleryContent)
-    }
-
     //increasing / decreasing by 1 likes when clicking on the heart
-    const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')],mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')],
-    heartCharacter = [...document.querySelectorAll('.photographer-image-likes-increase .heart-filled')],
-    heartBeams = [...document.querySelectorAll('.photographer-image-likes-increase .beams-container')],
-    likesIncreased = [] // know if the media is already liked
+    const mediaLikesQty = [...document.querySelectorAll('.photographer-image-likes')], mediaLikesBtn = [...document.querySelectorAll('.photographer-image-likes-increase')],
+        heartCharacter = [...document.querySelectorAll('.photographer-image-likes-increase .heart-filled')],
+        heartBeams = [...document.querySelectorAll('.photographer-image-likes-increase .beams-container')],
+        likesIncreased = [] // know if the media is already liked
     likesIncreased.length = mediaQty
     likesIncreased.fill(false)
 
@@ -113,7 +89,7 @@ async function main() {
 
         const animatedHeart = [heartCharacter[index], heartBeams[index]]
         animatedHeart.forEach(elt => elt.classList.toggle('active'))
-        
+
         likesIncreased[index] = !likesIncreased[index]
 
         photographerLikesQty.textContent = photographerLikes
@@ -158,7 +134,7 @@ async function main() {
 
     //displaying lightbox media
     const displaylightboxMedia = (idx) => {
-        const media = new MediaFactory(myMedia[idx], photographerName)
+        const media = new MediaFactory(new NewMedia(myMedia[idx], photographerId))
         lightboxMediaTitle.innerText = myMedia[idx].title
         lightboxMediaContainer.innerHTML = media.createTag()
     }
@@ -199,12 +175,10 @@ async function main() {
     const contactModalNavigation = e => {
         e.key === 'Tab' && e.preventDefault()
         e.key === 'Escape' && (closeModal(contactModal, contactModalNavigation), modalDisplayed = !modalDisplayed)
-        console.log(e.target)
         lastFocusedElt = focusTrap(e, lastFocusedElt, contactModalBtns)
     }
 
     displayContactModal.forEach(btn => {
-
         btn.addEventListener('click', () => {
             modalDisplayed ? closeModal(contactModal, contactModalNavigation) : (openModal(contactModal, contactModalBtns, contactModalNavigation),
                 lastFocusedElt = 0)
@@ -212,15 +186,27 @@ async function main() {
         })
     })
 
-    //filters 
+    /* When the submit button is clicked, the page is not reloaded. the values of the form are logged in the console. the modal is closed. */
+    contactModal.addEventListener('submit', e => {
+        e.preventDefault()
+        console.log('prénom: ', document.getElementById('first-name').value,
+            '\n',
+            'nom : ', document.getElementById('last-name').value,
+            '\n',
+            'email: ', document.getElementById('mail').value,
+            '\n',
+            'message: ', document.getElementById('message').value)
+        closeModal(contactModal, contactModalNavigation)
+        modalDisplayed = !modalDisplayed
+    })
 
-    const filtersContainer = document.querySelector('.filters-container'),
-    filtersBtnContainerOpener = document.querySelector('.filters-btn-opener'),
-    filtersBtnContainerOpenerName = document.querySelector('.filters-btn-opener-name'),
-    filtersBtnContainer = document.querySelector('.filters-btn-container'),
-    filterButtons = document.querySelectorAll('.filter-btn')
+    //filtering the media 
+    const filtersBtnContainerOpener = document.querySelector('.filters-btn-opener'),
+        filtersBtnContainerOpenerName = document.querySelector('.filters-btn-opener-name'),
+        filtersBtnContainer = document.querySelector('.filters-btn-container'),
+        filterButtons = document.querySelectorAll('.filter-btn')
 
-     filtersBtnContainerOpener.addEventListener('click', () => filtersBtnContainer.classList.add('open'))
+    filtersBtnContainerOpener.addEventListener('click', () => filtersBtnContainer.classList.add('open'))
 
     filterButtons.forEach(button => button.addEventListener('click', e => {
         const filterSelected = e.target.innerText
@@ -228,6 +214,32 @@ async function main() {
         filtersBtnContainer.classList.remove('open')
         filtersBtnContainerOpenerName.innerText = filterSelected
     }))
+
+    /* display the filtered the gallery : date / likes / title */
+    const filteredGallery = (filteredValue) => {
+
+        galleryContent.sort(function (a, b) {
+
+            /* Converting the string to a number. */
+            let aValue = + a.dataset[filteredValue]
+            let bValue = + b.dataset[filteredValue]
+
+            /* Checking if the value is a number. If it is not, it is assigning the value to the variable. */
+            !aValue && (aValue = a.dataset[filteredValue])
+            !bValue && (bValue = b.dataset[filteredValue])
+
+            if (aValue < bValue) {
+                return -1
+            }
+            if (aValue > bValue) {
+                return 1
+            }
+            return 0
+        }
+        )
+
+        fillGallery(galleryContent)
+    }
 
     //Display photographers infos : likes and price
     photographerLikesQty.textContent = photographerLikes

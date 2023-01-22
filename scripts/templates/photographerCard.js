@@ -1,6 +1,6 @@
 export default class PhotographerCard {
     constructor(photographer){
-        this.photographer = photographer
+        this._photographer = photographer
     }
 
     createPhotographerCard() {
@@ -8,11 +8,11 @@ export default class PhotographerCard {
         const $container = document.createElement('article')
         $container.classList.add('photographer-card')
 
-        const { name, portrait, city, country, tagline, price, id } = this.photographer
+        const { name, portraitPath, city, country, tagline, price, id } = this._photographer
 
         const cardContent = `
         <a href="./photographer.html?id=${id}" class="photographer-link">
-            <img src="./assets/photographers/${portrait}" class="photographer-portrait" alt="${name}">
+            <img src="${portraitPath}" class="photographer-portrait" alt="${name}">
             <h2 class="photographer-name">
                 ${name}
             </h2>
@@ -25,7 +25,7 @@ export default class PhotographerCard {
                 ${tagline}
             </span>
             <span class="photographer-price">
-                ${price}€/jour
+                ${price}
             </span>
         </p>`
 
