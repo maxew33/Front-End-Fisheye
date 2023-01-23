@@ -9,18 +9,15 @@
 
 export default function focusTrap(e, lastFocusedElt, focusableElements){
     let newFocusedElt
-    console.log(e,lastFocusedElt,focusableElements)
     if (e.key === 'Tab') {
         if (e.shiftKey) {
             lastFocusedElt === 0 ? newFocusedElt = focusableElements.length - 1 : newFocusedElt = lastFocusedElt - 1
         }
         else {
             lastFocusedElt === focusableElements.length - 1 ? newFocusedElt = 0 : newFocusedElt = lastFocusedElt + 1
-            console.log(newFocusedElt)
         }
         focusableElements[newFocusedElt].focus()
         lastFocusedElt = newFocusedElt
-        console.log('ok', lastFocusedElt)
 
     }
 

@@ -3,9 +3,8 @@
         --beam-transY: 0rem;
 
         position: relative;
-        cursor: pointer;
         font-size: 1.25rem;
-        width: 1.5rem;
+        display: inline-flex;
 
         /*&:hover {
             .heart-filled {
@@ -16,6 +15,15 @@
                 display: inline;
             }
         }*/
+
+        .hearts-container{
+            display: inline-flex;
+            position: relative;
+            width: 2.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;;
+        }
 
         .heart {
             position: absolute;

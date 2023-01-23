@@ -8,7 +8,7 @@ export default class PhotographerCard {
         const $container = document.createElement('article')
         $container.classList.add('photographer-card')
 
-        const { name, portraitPath, city, country, tagline, price, id } = this._photographer
+        const { name, portraitPath, place, tagline, price, id } = this._photographer
 
         const cardContent = `
         <a href="./photographer.html?id=${id}" class="photographer-link">
@@ -19,7 +19,7 @@ export default class PhotographerCard {
         </a>
         <p class="photographer-infos">
             <span class="photographer-place">
-                ${city}, ${country}
+                ${place}
             </span>
             <span class="photographer-tagline">
                 ${tagline}

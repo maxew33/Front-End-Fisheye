@@ -1,5 +1,5 @@
 import MyApi from "../api/Api.js"
-import NewPhotographer from "../models/PhotographerConstructor.js"
+import Photographer from "../models/Photographer.js"
 import PhotographerCard from "../templates/photographerCard.js"
 
 const api = new MyApi('./../../data/photographers.json'),
@@ -9,7 +9,7 @@ async function main() {
     const photographersInfos = await api.getPhotographers()
 
     photographersInfos
-        .map(photographer => new NewPhotographer(photographer))
+        .map(photographer => new Photographer(photographer))
         .forEach(photographer => {
             const card = new PhotographerCard(photographer)
             const myCard = card.createPhotographerCard()

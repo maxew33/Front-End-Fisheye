@@ -11,7 +11,7 @@ export default class PhotographerBanner{
  */
     createPhotographerBanner() {
         
-        const { name, portraitPath, city, country, tagline } = this.photographer
+        const { name, portraitPath, place, tagline } = this.photographer
 
         const cardContent = `
         <div class="photographer-infos">
@@ -19,7 +19,7 @@ export default class PhotographerBanner{
                 ${name}
             </h1>
             <span class="photographer-place">
-                ${city}, ${country}
+                ${place}
             </span>
             <span class="photographer-tagline">
                 ${tagline}

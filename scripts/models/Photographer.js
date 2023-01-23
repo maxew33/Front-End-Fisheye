@@ -1,4 +1,4 @@
-export default class NewPhotographer {
+export default class Photographer {
     constructor(data) {
         this._name = data.name
         this._portrait = data.portrait
@@ -15,6 +15,10 @@ export default class NewPhotographer {
 
     get portraitPath() {
         return `./assets/photographers/${this._portrait}`
+    }
+
+    get place(){
+        return `${this._city}, ${this._country}`
     }
 
     get city() {

@@ -1,12 +1,12 @@
 import MyApi from "../api/Api.js"
 
-import NewPhotographer from "../models/PhotographerConstructor.js"
-import NewMedia from "../models/MediaConstructor.js"
+import Photographer from "../models/Photographer.js"
+import Media from "../models/Media.js"
 
-import PhotographerGallery from "../templates/photographerGallery.js"
-import PhotographerBanner from "../templates/photographerBanner.js"
+import PhotographerGallery from "../templates/PhotographerGallery.js"
+import PhotographerBanner from "../templates/PhotographerBanner.js"
 
-import MediaFactory from "../factories/mediaFactory.js"
+import MediaFactory from "../factories/MediaFactory.js"
 
 import focusTrap from "../utils/focusTrap.js"
 import { closeModal, openModal } from "../utils/modalsDisplaying.js"
@@ -36,7 +36,7 @@ async function main() {
     const myURL = new URLSearchParams(document.location.search)
     const photographerId = parseInt(myURL.get("id"))
 
-    const myPhotographer = new NewPhotographer(photographersInfos.filter(photographer => {
+    const myPhotographer = new Photographer(photographersInfos.filter(photographer => {
         return photographer['id'] === photographerId
     })[0])
 
@@ -59,7 +59,7 @@ async function main() {
 
     //fill the galleryContent array 
     myMedia
-    .map(media => new NewMedia(media, photographerId))
+    .map(media => new Media(media, photographerId))
     .forEach(media => {
         photographerLikes += media.likes
         const photographerGallery = new PhotographerGallery(media)
@@ -134,7 +134,7 @@ async function main() {
 
     //displaying lightbox media
     const displaylightboxMedia = (idx) => {
-        const media = new MediaFactory(new NewMedia(myMedia[idx], photographerId))
+        const media = new MediaFactory(new Media(myMedia[idx], photographerId))
         lightboxMediaTitle.innerText = myMedia[idx].title
         lightboxMediaContainer.innerHTML = media.createTag()
     }

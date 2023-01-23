@@ -4,3 +4,10 @@ body {
     font-family: $fontfam;
     padding: 2.5rem 6.25rem;
 }
+
+.invisible{
+    width: 0;
+    height: 0;
+    position: absolute;
+    overflow: hidden;
+}

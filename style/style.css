@@ -142,9 +142,8 @@ a:visited {
   --scale: 0;
   --beam-transY: 0rem;
   position: relative;
-  cursor: pointer;
   font-size: 1.25rem;
-  width: 1.5rem;
+  display: inline-flex;
   /*&:hover {
       .heart-filled {
           display: inline;
@@ -154,6 +153,14 @@ a:visited {
           display: inline;
       }
   }*/
+}
+.photographer-image-likes-increase .hearts-container {
+  display: inline-flex;
+  position: relative;
+  width: 2.5rem;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 .photographer-image-likes-increase .heart {
   position: absolute;
@@ -506,7 +513,7 @@ form input {
   margin-bottom: 1.75rem;
 }
 .photographer-card .photographer-link .photographer-name {
-  color: #d3573c;
+  color: #c75137;
   font-size: 2.25rem;
 }
 .photographer-card .photographer-infos {
@@ -519,14 +526,14 @@ form input {
 }
 .photographer-card .photographer-infos .photographer-place {
   font-size: 0.8rem;
-  color: #d3573c;
+  color: #c75137;
 }
 .photographer-card .photographer-infos .photographer-tagline {
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   font-weight: bold;
 }
 .photographer-card .photographer-infos .photographer-price {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   color: #525252;
 }
 
@@ -545,12 +552,12 @@ form input {
   height: 12.5rem;
 }
 .photographer-banner .photographer-infos .photographer-name {
-  color: #d3573c;
+  color: #c75137;
   font-size: 4rem;
 }
 .photographer-banner .photographer-infos .photographer-place {
   font-size: 1.5rem;
-  color: #d3573c;
+  color: #c75137;
 }
 .photographer-banner .photographer-infos .photographer-tagline {
   font-size: 1.125rem;
@@ -613,7 +620,11 @@ form input {
 
 /* NUMBERS (likes + price) */
 .photographer-numbers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: fixed;
+  width: 16rem;
   font-size: 1.5rem;
   white-space: nowrap;
   padding: 1.5rem 2rem;
@@ -621,9 +632,6 @@ form input {
   top: 100vh;
   left: 95vw;
   transform: translate(-100%, -100%);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
   background: #d3573c;
   border-radius: 5px 5px 0 0;
 }
@@ -631,4 +639,11 @@ form input {
 body {
   font-family: "DM Sans", sans-serif;
   padding: 2.5rem 6.25rem;
+}
+
+.invisible {
+  width: 0;
+  height: 0;
+  position: absolute;
+  overflow: hidden;
 }/*# sourceMappingURL=style.css.map */

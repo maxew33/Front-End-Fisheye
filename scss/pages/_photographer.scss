@@ -84,7 +84,9 @@
     /* NUMBERS (likes + price) */
 
     .photographer-numbers {
+        @include flex-center-between;
         position: fixed;
+        width: 16rem;
         font-size: 1.5rem;
         white-space: nowrap;
         padding: 1.5rem 2rem;
@@ -92,9 +94,6 @@
         top: 100vh;
         left: 95vw;
         transform: translate(-100%, -100%);
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
         background: $bg-2;
         border-radius: 5px 5px 0 0;
     }

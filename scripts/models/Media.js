@@ -1,4 +1,4 @@
-export default class NewMedia {
+export default class Media {
     constructor(data, id) {
         this._id = id
         this._image = data.image

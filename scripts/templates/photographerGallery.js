@@ -1,4 +1,4 @@
-import MediaFactory from "../factories/mediaFactory.js"
+import MediaFactory from "../factories/MediaFactory.js"
 
 export default class PhotographerGallery {
     constructor(gallery) {
@@ -27,25 +27,28 @@ export default class PhotographerGallery {
         const cardInfos = `
             <div class="photographer-image-infos">
                 <span class="photographer-image-title">${title}</span>
-                <span class="photographer-image-likes">${likes}</span>
-                &nbsp;
-                <button class="photographer-image-likes-increase" aria-label="likes">
-                    <span class="heart heart-empty">
-                        <i class="fa-regular fa-heart"></i>
-                    </span>
+                <span class="photographer-image-likes-increase">
 
-                    <span class="heart heart-filled">
-                        <i class="fa-solid fa-heart"></i>
-                    </span>
+                    <span class="photographer-image-likes">${likes}</span>
 
-                    <span class="beams-container">
-                        <span class="beam"></span>
-                        <span class="beam"></span>
-                        <span class="beam"></span>
-                        <span class="beam"></span>
-                        <span class="beam"></span>
-                    </span>
-                </button>
+                    <button span class="hearts-container" aria-label="likes">
+                        <span class="heart heart-empty">
+                            <i class="fa-regular fa-heart"></i>
+                        </span>
+
+                        <span class="heart heart-filled">
+                            <i class="fa-solid fa-heart"></i>
+                        </span>
+
+                        <span class="beams-container">
+                            <span class="beam"></span>
+                            <span class="beam"></span>
+                            <span class="beam"></span>
+                            <span class="beam"></span>
+                            <span class="beam"></span>
+                        </span>
+                    </button>
+                </span>
             </div>
             `
 
@@ -55,5 +58,3 @@ export default class PhotographerGallery {
         return $container
     }
 }
-
-/* ENLEVER LES DATA ATTRIBUTES ???? */

@@ -1,5 +1,5 @@
-import Photo from "./mediaPhoto.js"
-import Video from "./mediaVideo.js"
+import Photo from "../templates/Photo.js"
+import Video from "../templates/Video.js"
 
 export default class MediaFactory{
     constructor(data){
