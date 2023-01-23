@@ -26,7 +26,8 @@ const api = new MyApi('./../../data/photographers.json'),
 let mediaIndex = 0, //index of the current photo for the lightbox
     mediaQty = 0,
     photographerLikes = 0, // sum of the likes
-    lastFocusedElt = 0 // index of the last focused element within the focus trap
+    lastFocusedElt = 0, // index of the last focused element within the focus trap
+    mediaSelected // media clicked to open the lightbox
 
 async function main() {
     const photographersInfos = await api.getPhotographers(),
@@ -101,6 +102,7 @@ async function main() {
 
     //when I click, open the lightbox with the right index
     myImages.forEach((image, idx) => {
+        mediaSelected = image
         image.addEventListener('click', () => {
             openlightbox(idx)
         })
@@ -126,7 +128,7 @@ async function main() {
 
     const lightboxNavigation = e => {
         e.preventDefault()
-        e.key === 'Escape' && closeModal(lightbox, lightboxNavigation)
+        e.key === 'Escape' && (closeModal(lightbox, lightboxNavigation), mediaSelected.focus())
         e.key === 'ArrowLeft' && lightboxBtnNav(0)
         e.key === 'ArrowRight' && lightboxBtnNav(1)
         lastFocusedElt = focusTrap(e, lastFocusedElt, lightboxBtns)
@@ -142,9 +144,10 @@ async function main() {
     //lightbox interactions
     closelightboxBtn.addEventListener('click', () => {
         closeModal(lightbox, lightboxNavigation)
+        mediaSelected.focus()
     })
     closelightboxBtn.addEventListener('keydown', e => {
-        e.key === 'Enter' && closeModal(lightbox, lightboxNavigation)
+        e.key === 'Enter' && (closeModal(lightbox, lightboxNavigation), mediaSelected.focus())
     })
 
     lightboxDirectionsBtns.forEach((btn, idx) => {
@@ -174,14 +177,24 @@ async function main() {
 
     const contactModalNavigation = e => {
         e.key === 'Tab' && e.preventDefault()
-        e.key === 'Escape' && (closeModal(contactModal, contactModalNavigation), modalDisplayed = !modalDisplayed)
+        if(e.key === 'Escape'){
+            closeModal(contactModal, contactModalNavigation)            
+            modalDisplayed = !modalDisplayed
+            displayContactModal[0].focus()
+        } 
         lastFocusedElt = focusTrap(e, lastFocusedElt, contactModalBtns)
     }
 
     displayContactModal.forEach(btn => {
         btn.addEventListener('click', () => {
-            modalDisplayed ? closeModal(contactModal, contactModalNavigation) : (openModal(contactModal, contactModalBtns, contactModalNavigation),
-                lastFocusedElt = 0)
+            if(modalDisplayed){
+                closeModal(contactModal, contactModalNavigation)
+                displayContactModal[0].focus()
+            } 
+            else{
+                openModal(contactModal, contactModalBtns, contactModalNavigation)
+                lastFocusedElt = 0
+            }
             modalDisplayed = !modalDisplayed
         })
     })
@@ -198,6 +211,7 @@ async function main() {
             'message: ', document.getElementById('message').value)
         closeModal(contactModal, contactModalNavigation)
         modalDisplayed = !modalDisplayed
+        displayContactModal[0].focus()
     })
 
     //filtering the media 
@@ -206,14 +220,30 @@ async function main() {
         filtersBtnContainer = document.querySelector('.filters-btn-container'),
         filterButtons = document.querySelectorAll('.filter-btn')
 
-    filtersBtnContainerOpener.addEventListener('click', () => filtersBtnContainer.classList.add('open'))
+    filtersBtnContainerOpener.addEventListener('click', () => {
+        filtersBtnContainer.classList.add('open')
+        filtersBtnContainerOpener.setAttribute('aria-expanded', 'true')
+        filterButtons[0].focus()
+    })
 
-    filterButtons.forEach(button => button.addEventListener('click', e => {
-        const filterSelected = e.target.innerText
-        filteredGallery(e.target.dataset.filterValue)
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            console.log(button.id)
+        filterButtonSelected(button.id, button.innerText)
+    })
+    button.addEventListener('keydown', e => {
+        e.key === 'Enter' && filterButtonSelected(button.id, button.innerText)
+    })
+})
+
+//function triggered when a filter is selected
+    const filterButtonSelected = (id, text) => {
+        filteredGallery(id)
         filtersBtnContainer.classList.remove('open')
-        filtersBtnContainerOpenerName.innerText = filterSelected
-    }))
+        filtersBtnContainerOpener.setAttribute('aria-expanded', 'false')        
+        filtersBtnContainerOpener.setAttribute('aria-activedescendant', id)
+        filtersBtnContainerOpenerName.innerText = text
+    }
 
     /* display the filtered the gallery : date / likes / title */
     const filteredGallery = (filteredValue) => {

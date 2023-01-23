@@ -24,25 +24,25 @@
     <section class="photographer-banner"></section>
 
     <div class="filters">
-      <span>Trier par </span>
-
+      <span id="filters-label">Trier par </span>
       <div class="filters-container">
 
-        <button class="filters-btn-opener" aria-expanded="false">
+        <button class="filters-btn-opener" aria-expanded="false" aria-haspopup="listbox"
+          aria-labelledby="filters-label">
           <span class="filters-btn-opener-name">Date</span><i class="fa-solid fa-chevron-down"></i>
         </button>
 
-        <div class="filters-btn-container">
-          <button class="filter-btn" data-filter-value="likes">
+        <ul class="filters-btn-container" role="listbox" aria-labelledby="filters-label" aria-activedescendant="date">
+          <li class="filter-btn" id="likes" role="option" aria-labelledby="filters-label" tabindex="0">
             Popularité<span><i class="fa-solid fa-chevron-up"></i></span>
-          </button>
-          <button class="filter-btn" data-filter-value="date">
+          </li>
+          <li class="filter-btn" id="date" role="option" aria-labelledby="filters-label" tabindex="0">
             Date
-          </button>
-          <button class="filter-btn" data-filter-value="title">
+          </li>
+          <li class="filter-btn" id="title" role="option" aria-labelledby="filters-label" tabindex="0">
             Titre
-          </button>
-        </div>
+          </li>
+        </ul>
 
       </div>
 
@@ -67,8 +67,10 @@
         <div class="media-container">
         </div>
         <button class="lightbox-close lightbox-btn" aria-label="Close dialog"><i class="fa-solid fa-xmark"></i></button>
-        <button class="lightbox-prev lightbox-direction-btn lightbox-btn" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
-        <button class="lightbox-next lightbox-direction-btn lightbox-btn" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+        <button class="lightbox-prev lightbox-direction-btn lightbox-btn" aria-label="Previous image"><i
+            class="fa-solid fa-chevron-left"></i></button>
+        <button class="lightbox-next lightbox-direction-btn lightbox-btn" aria-label="Next image"><i
+            class="fa-solid fa-chevron-right"></i></button>
       </div>
       <p class="media-title"></p>
     </section>
@@ -79,17 +81,20 @@
     <div class="modal">
       <header>
         <h1>Contactez-moi <br /><span class="photographer-name"></span></h1>
-        <button class="contact-modal-focusable-elt display-modal-button" aria-label="Fermer la page de contact"><i class="fa-solid fa-xmark"></i></button>
+        <button class="contact-modal-focusable-elt display-modal-button" aria-label="Fermer la page de contact"><i
+            class="fa-solid fa-xmark"></i></button>
       </header>
       <form class="contact-form">
         <label for="first-name" class="modal-label">Prénom</label>
-        <input type="text" name="first-name" id="first-name" class="contact-modal-focusable-elt modal-input" required aria-labelledby="">
+        <input type="text" name="first-name" id="first-name" class="contact-modal-focusable-elt modal-input" required
+          aria-labelledby="">
         <label for="last-name" class="modal-label">Nom</label>
         <input type="text" name="last-name" id="last-name" class="contact-modal-focusable-elt modal-input" required>
         <label for="mail" class="modal-label">Email</label>
         <input type="mail" name="mail" id="mail" class="contact-modal-focusable-elt modal-input" required>
         <label for="message" class="modal-label">Votre message</label>
-        <textarea name="message" id="message" class="contact-modal-focusable-elt modal-message-content" required></textarea>
+        <textarea name="message" id="message" class="contact-modal-focusable-elt modal-message-content"
+          required></textarea>
         <button class="contact_button contact-modal-focusable-elt">Envoyer</button>
       </form>
     </div>
