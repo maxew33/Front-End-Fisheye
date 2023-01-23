@@ -9,7 +9,6 @@ const body = document.querySelector('body')
  * @param focusTrap - a function that traps the focus within the modal
  */
 export function openModal(modal, focusableElements, focusTrap) {
-    console.log('opened')
     modal.style.display = 'grid'
     body.style.overflow = 'hidden'
     window.addEventListener('keydown', focusTrap)
@@ -23,7 +22,6 @@ export function openModal(modal, focusableElements, focusTrap) {
  * @param focusTrap - a function that prevents the user from tabbing out of the modal
  */
 export function closeModal(modal, focusTrap) {
-    console.log('closed')
     modal.style.display = 'none'
     body.style.overflow = 'auto'
     window.removeEventListener('keydown', focusTrap)

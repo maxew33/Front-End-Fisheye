@@ -1,6 +1,6 @@
 import MyApi from "../api/Api.js"
 import Photographer from "../models/Photographer.js"
-import PhotographerCard from "../templates/photographerCard.js"
+import PhotographerCard from "../templates/PhotographerCard.js"
 
 const api = new MyApi('./../../data/photographers.json'),
     photographersContainer = document.getElementById('main-homepage')

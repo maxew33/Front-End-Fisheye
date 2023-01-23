@@ -1,3 +1,4 @@
+/* It creates a card with the photographer's name, portrait, place, tagline, and price. */
 export default class PhotographerCard {
     constructor(photographer){
         this._photographer = photographer
@@ -34,5 +35,3 @@ export default class PhotographerCard {
         return $container
     }
 }
-
-// export {PhotographerCard}

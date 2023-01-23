@@ -6,8 +6,7 @@ export default class PhotographerGallery {
     }
 
     createPhotographerGallery() {
-
-        console.log(this._gallery)
+        
         const $container = document.createElement('article')
         $container.classList.add('photographer-image-container')
 
