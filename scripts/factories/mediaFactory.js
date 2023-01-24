@@ -1,8 +1,8 @@
+/* return a new instance of either the Photo or Video class, depending on the data passed to it. */
+
 import Photo from "../templates/Photo.js"
 import Video from "../templates/Video.js"
 
-/* The MediaFactory class is a factory class that returns a new instance of either the Photo or Video
-class, depending on the data passed to it. */
 export default class MediaFactory{
     constructor(data){
         if(data._image){

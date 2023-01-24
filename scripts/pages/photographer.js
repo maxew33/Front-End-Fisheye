@@ -59,6 +59,12 @@ async function main() {
 
     mediaQty = myMedia.length
 
+    /**
+     * 
+     * the gallery
+     * 
+     */
+
     //remove content from the gallery
     gallery.innerHTML = ''
     galleryContent.length = 0
@@ -101,6 +107,11 @@ async function main() {
         photographerLikesQty.textContent = photographerLikes
     }))
 
+    /**
+     * 
+     * the lightbox
+     * 
+     */
 
     // lightbox logic
     const myImages = [...document.querySelectorAll('.photographer-gallery .photographer-media')]
@@ -173,7 +184,12 @@ async function main() {
         displaylightboxMedia(mediaIndex)
     }
 
-    //Contact modal
+    /**
+     * 
+     * the contact modal
+     * 
+     */
+
     const displayContactModal = [...document.querySelectorAll('.display-modal-button')],
         contactModalBtns = [...document.querySelectorAll('.contact-modal-focusable-elt')]
     let modalDisplayed = false
@@ -229,7 +245,12 @@ async function main() {
         displayContactModal[0].focus()
     })
 
-    //filtering the media 
+    /**
+     * 
+     * the media filters
+     * 
+     */
+    
     const filtersBtnContainerOpener = document.querySelector('.filters-btn-opener'),
         filtersBtnContainerOpenerName = document.querySelector('.filters-btn-opener-name'),
         filtersBtnContainer = document.querySelector('.filters-btn-container'),
