@@ -220,29 +220,44 @@ async function main() {
         })
     })
 
-    /* When the submit button is clicked, the page is not reloaded. the values of the form are logged in the console. the modal is closed. */
+    /* When the submit button is clicked, the page is not reloaded. 
+    if the form is correctly filled, the values of the form are logged in the console. the modal is closed, otherwise an error message is displayed. */
     contactModal.addEventListener('submit', e => {
         e.preventDefault()
-        const inputs = [...document.querySelectorAll('.contact-form input'), document.querySelector('.contact-form textarea')]
+        const inputs = [...document.querySelectorAll('.contact-form input'), document.querySelector('.contact-form textarea')] // select the inputs + textarea
+        const errorMsg = [...document.querySelectorAll('.contact-form .hidden')] // select the message error container
 
         let inputsCorrect = 0
-        inputs.forEach(input => {
+
+        inputs.forEach((input, idx) => {
             const inputChecked = formChecker(input)
-            inputChecked === 'true' ? (inputsCorrect += 1, input.setAttribute('aria-invalid', false)) : (console.error(inputChecked), input.setAttribute('aria-invalid', true))
+            if(inputChecked === 'true'){
+                inputsCorrect += 1
+                input.setAttribute('aria-invalid', false)
+                errorMsg[idx].style.display='none'
+            }
+            else{
+                console.error(inputChecked)
+                input.setAttribute('aria-invalid', true)
+                errorMsg[idx].style.display='block'
+            }
         })
 
-        inputsCorrect === inputs.length ?
+        console.log(inputsCorrect)
+
+        if(inputsCorrect === inputs.length){
             console.log('prénom: ', document.getElementById('first-name').value,
-                '\n',
-                'nom : ', document.getElementById('last-name').value,
-                '\n',
-                'email: ', document.getElementById('mail').value,
-                '\n',
-                'message: ', document.getElementById('message').value)
-            : console.log('tous les champs n\'ont pas été complété correctement.')
-        closeModal(contactModal, contactModalNavigation)
-        modalDisplayed = !modalDisplayed
-        displayContactModal[0].focus()
+            '\n',
+            'nom : ', document.getElementById('last-name').value,
+            '\n',
+            'email: ', document.getElementById('mail').value,
+            '\n',
+            'message: ', document.getElementById('message').value)
+
+            closeModal(contactModal, contactModalNavigation)
+            modalDisplayed = !modalDisplayed
+            displayContactModal[0].focus()
+        }       
     })
 
     /**
@@ -264,7 +279,6 @@ async function main() {
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            console.log(button.id)
             filterButtonSelected(button.id, button.innerText)
         })
         button.addEventListener('keydown', e => {

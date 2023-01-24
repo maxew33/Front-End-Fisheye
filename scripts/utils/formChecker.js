@@ -23,7 +23,7 @@ export default function formChecker(input){
             inputChecked = input.value.match(formConditions['text']) ? 'true' : 'le message est trop court.'
             break
 
-            default : console.error('cet input ne correspond pas à un de ceux attendus')
+            default : console.error('the input format is unexpected')
     }
 
     return inputChecked
