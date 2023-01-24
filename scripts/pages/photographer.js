@@ -1,15 +1,20 @@
 import MyApi from "../api/Api.js"
 
+// constructor
 import Photographer from "../models/Photographer.js"
 import Media from "../models/Media.js"
 
+// templates
 import PhotographerGallery from "../templates/PhotographerGallery.js"
 import PhotographerBanner from "../templates/PhotographerBanner.js"
 
+// factory
 import MediaFactory from "../factories/MediaFactory.js"
 
+// utils functions
 import focusTrap from "../utils/focusTrap.js"
 import { closeModal, openModal } from "../utils/modalsDisplaying.js"
+import formChecker from "../utils/formChecker.js"
 
 const api = new MyApi('./../../data/photographers.json'),
     mainContainer = document.querySelector('.photographer-banner'),
@@ -60,13 +65,13 @@ async function main() {
 
     //fill the galleryContent array 
     myMedia
-    .map(media => new Media(media, photographerId))
-    .forEach(media => {
-        photographerLikes += media.likes
-        const photographerGallery = new PhotographerGallery(media)
-        const img = photographerGallery.createPhotographerGallery()
-        galleryContent.push(img)
-    })
+        .map(media => new Media(media, photographerId))
+        .forEach(media => {
+            photographerLikes += media.likes
+            const photographerGallery = new PhotographerGallery(media)
+            const img = photographerGallery.createPhotographerGallery()
+            galleryContent.push(img)
+        })
 
     //fill the gallery with the medias and their infos
     const fillGallery = (content) => content.forEach(elt => {
@@ -177,21 +182,21 @@ async function main() {
 
     const contactModalNavigation = e => {
         e.key === 'Tab' && e.preventDefault()
-        if(e.key === 'Escape'){
-            closeModal(contactModal, contactModalNavigation)            
+        if (e.key === 'Escape') {
+            closeModal(contactModal, contactModalNavigation)
             modalDisplayed = !modalDisplayed
             displayContactModal[0].focus()
-        } 
+        }
         lastFocusedElt = focusTrap(e, lastFocusedElt, contactModalBtns)
     }
 
     displayContactModal.forEach(btn => {
         btn.addEventListener('click', () => {
-            if(modalDisplayed){
+            if (modalDisplayed) {
                 closeModal(contactModal, contactModalNavigation)
                 displayContactModal[0].focus()
-            } 
-            else{
+            }
+            else {
                 openModal(contactModal, contactModalBtns, contactModalNavigation)
                 lastFocusedElt = 0
             }
@@ -202,13 +207,23 @@ async function main() {
     /* When the submit button is clicked, the page is not reloaded. the values of the form are logged in the console. the modal is closed. */
     contactModal.addEventListener('submit', e => {
         e.preventDefault()
-        console.log('prénom: ', document.getElementById('first-name').value,
-            '\n',
-            'nom : ', document.getElementById('last-name').value,
-            '\n',
-            'email: ', document.getElementById('mail').value,
-            '\n',
-            'message: ', document.getElementById('message').value)
+        const inputs = [...document.querySelectorAll('.contact-form input'), document.querySelector('.contact-form textarea')]
+
+        let inputsCorrect = 0
+        inputs.forEach(input => {
+            const inputChecked = formChecker(input)
+            inputChecked === 'true' ? inputsCorrect += 1 : console.error(inputChecked)
+        })
+
+        inputsCorrect === inputs.length ?
+            console.log('prénom: ', document.getElementById('first-name').value,
+                '\n',
+                'nom : ', document.getElementById('last-name').value,
+                '\n',
+                'email: ', document.getElementById('mail').value,
+                '\n',
+                'message: ', document.getElementById('message').value)
+            : console.log('tous les champs n\'ont pas été complété correctement.')
         closeModal(contactModal, contactModalNavigation)
         modalDisplayed = !modalDisplayed
         displayContactModal[0].focus()
@@ -229,18 +244,18 @@ async function main() {
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             console.log(button.id)
-        filterButtonSelected(button.id, button.innerText)
+            filterButtonSelected(button.id, button.innerText)
+        })
+        button.addEventListener('keydown', e => {
+            e.key === 'Enter' && filterButtonSelected(button.id, button.innerText)
+        })
     })
-    button.addEventListener('keydown', e => {
-        e.key === 'Enter' && filterButtonSelected(button.id, button.innerText)
-    })
-})
 
-//function triggered when a filter is selected
+    //function triggered when a filter is selected
     const filterButtonSelected = (id, text) => {
         filteredGallery(id)
         filtersBtnContainer.classList.remove('open')
-        filtersBtnContainerOpener.setAttribute('aria-expanded', 'false')        
+        filtersBtnContainerOpener.setAttribute('aria-expanded', 'false')
         filtersBtnContainerOpener.setAttribute('aria-activedescendant', id)
         filtersBtnContainerOpenerName.innerText = text
     }
