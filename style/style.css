@@ -354,8 +354,9 @@ a:visited {
   border-radius: 5px;
   height: 10rem;
   font-size: 2rem;
+  width: 100%;
 }
-.contact-form button {
+.contact-form .contact_button {
   padding: 1rem;
   background: #901c1c;
   border: none;

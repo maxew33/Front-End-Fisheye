@@ -66,9 +66,10 @@
         border-radius: 5px;
         height: 10rem;
         font-size: 2rem;
+        width: 100%;
     }
 
-    button{
+    .contact_button{
         padding: 1rem;
         background: $bg-1;
         border: none;
