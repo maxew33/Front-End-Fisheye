@@ -1,3 +1,8 @@
+/**
+ *  Creation of a video tag with the given video path and title. 
+ *  return the DOM element
+ * */ 
+
 export default class Video{
     constructor(data) {
         this._videoPath = data.videoPath

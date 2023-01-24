@@ -1,15 +1,15 @@
 import MyApi from "../api/Api.js"
 
-// constructor
+// constructor pattern
 import Photographer from "../models/Photographer.js"
 import Media from "../models/Media.js"
+
+// factory pattern
+import MediaFactory from "../factories/MediaFactory.js"
 
 // templates
 import PhotographerGallery from "../templates/PhotographerGallery.js"
 import PhotographerBanner from "../templates/PhotographerBanner.js"
-
-// factory
-import MediaFactory from "../factories/MediaFactory.js"
 
 // utils functions
 import focusTrap from "../utils/focusTrap.js"

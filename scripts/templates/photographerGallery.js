@@ -1,3 +1,8 @@
+/**
+ * creation of a card with a media (image or video) and its infos (title, likes, date)
+ * return the DOM element.
+*/ 
+
 import MediaFactory from "../factories/MediaFactory.js"
 
 export default class PhotographerGallery {

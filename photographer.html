@@ -13,25 +13,26 @@
 </head>
 
 <body>
+  <!-- HEADER -->
   <header class="header">
     <a href="./index.html">
       <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
     </a>
   </header>
 
+
   <main id="main">
 
     <section class="photographer-banner"></section>
 
+<!-- FILTERS -->
     <div class="filters">
       <span id="filters-label">Trier par </span>
       <div class="filters-container">
-
         <button class="filters-btn-opener" aria-expanded="false" aria-haspopup="listbox"
           aria-labelledby="filters-label">
           <span class="filters-btn-opener-name">Date</span><i class="fa-solid fa-chevron-down"></i>
         </button>
-
         <ul class="filters-btn-container" role="listbox" aria-labelledby="filters-label" aria-activedescendant="date">
           <li class="filter-btn" id="likes" role="option" tabindex="0">
             Popularité<span><i class="fa-solid fa-chevron-up"></i></span>
@@ -43,12 +44,10 @@
             Titre
           </li>
         </ul>
-
       </div>
-
-
     </div>
 
+<!-- GALLERY -->
     <section class="photographer-gallery"></section>
 
     <p class="photographer-numbers">
@@ -62,6 +61,7 @@
       </span>
     </p>
 
+<!-- LIGHTBOX -->
     <section class="photographer-lightbox" aria-label="Image closeup view">
       <div class="photographer-lightbox-closeup">
         <div class="media-container">
@@ -77,6 +77,7 @@
 
   </main>
 
+<!-- CONTACT -->
   <section id="contact_modal">
     <div class="modal">
       <header>

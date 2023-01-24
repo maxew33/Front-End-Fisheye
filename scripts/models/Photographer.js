@@ -1,3 +1,5 @@
+/* Constructor Pattern that return the infos of the photographer*/
+
 export default class Photographer {
     constructor(data) {
         this._name = data.name

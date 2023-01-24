@@ -52,15 +52,6 @@
         }
         &.open{
             display: flex;
-            // height: 0;
-            // animation: expand-filters-container .25s ease-in-out forwards;
         }
     }
 }
-/*
-@keyframes expand-filters-container {
-    to{
-        // height: 210px;
-    }
-    
-}*/

@@ -1,3 +1,8 @@
+/**
+ * Creation of an image tag with the given image path and alternative text.
+ * return the DOM element
+ * */ 
+
 export default class Photo{
     constructor(data) {                     
         this._altText = data.altText

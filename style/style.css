@@ -138,21 +138,13 @@ a:visited {
 
 /* colors */
 /* font-family */
+/* heart animation when the media is liked */
 .photographer-image-likes-increase {
   --scale: 0;
   --beam-transY: 0rem;
   position: relative;
   font-size: 1.25rem;
   display: inline-flex;
-  /*&:hover {
-      .heart-filled {
-          display: inline;
-      }
-
-      .beams-container {
-          display: inline;
-      }
-  }*/
 }
 .photographer-image-likes-increase .hearts-container {
   display: inline-flex;
@@ -305,7 +297,6 @@ a:visited {
   place-content: center;
 }
 
-/* FORM MODAL */
 .modal {
   position: relative;
   top: 50%;
@@ -433,13 +424,6 @@ a:visited {
   display: flex;
 }
 
-/*
-@keyframes expand-filters-container {
-    to{
-        // height: 210px;
-    }
-
-}*/
 .photographer-lightbox {
   position: fixed;
   top: 0;

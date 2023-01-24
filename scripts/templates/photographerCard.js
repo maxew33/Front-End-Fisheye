@@ -1,4 +1,7 @@
-/* It creates a card with the photographer's name, portrait, place, tagline, and price. */
+/**
+ * creation of a card with the photographer's name, portrait, place, tagline, and price. 
+ * return the DOM element.
+ * */ 
 export default class PhotographerCard {
     constructor(photographer){
         this._photographer = photographer

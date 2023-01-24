@@ -1,14 +1,13 @@
+/**
+ * creation of a banner with the photographer's infos (name, portrait, place and tagline) and a contact button. 
+ * return the DOM element.
+ * */ 
+
 export default class PhotographerBanner{
     constructor(photographer){
         this.photographer = photographer
     }
 
-/**
- * It creates a banner for a photographer.
- * 
- * The function is called in the following way:
- * @returns {string} cardContent - photographer infos for homepage
- */
     createPhotographerBanner() {
         
         const { name, portraitPath, place, tagline } = this.photographer

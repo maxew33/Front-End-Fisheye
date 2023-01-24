@@ -1,3 +1,5 @@
+/* Constructor Pattern that return the infos of the media*/
+
 export default class Media {
     constructor(data, id) {
         this._id = id
