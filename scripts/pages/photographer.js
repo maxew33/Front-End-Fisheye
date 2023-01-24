@@ -228,7 +228,7 @@ async function main() {
         let inputsCorrect = 0
         inputs.forEach(input => {
             const inputChecked = formChecker(input)
-            inputChecked === 'true' ? inputsCorrect += 1 : console.error(inputChecked)
+            inputChecked === 'true' ? (inputsCorrect += 1, input.setAttribute('aria-invalid', false)) : (console.error(inputChecked), input.setAttribute('aria-invalid', true))
         })
 
         inputsCorrect === inputs.length ?

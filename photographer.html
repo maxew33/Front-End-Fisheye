@@ -8,8 +8,7 @@
 
   <!-- Primary Meta Tags -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="Description"
-    content="Fisheye, plateforme de photographes freelance">
+  <meta name="Description" content="Fisheye, plateforme de photographes freelance">
 
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -22,14 +21,13 @@
 </head>
 
 <body>
-  
+
   <!-- HEADER -->
   <header class="header">
     <a href="./index.html">
       <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
     </a>
   </header>
-
 
   <main id="main">
 
@@ -96,19 +94,45 @@
             class="fa-solid fa-xmark"></i></button>
       </header>
       <form class="contact-form">
-        <label for="first-name" class="modal-label">Prénom</label>
+
+        <label for="first-name" class="modal-label" id="first-name-label">Prénom</label>
+        <span>
+          <span class="hidden" id="first-name-format">
+            le nom doit comporter au moins deux lettres.
+          </span>
         <input type="text" name="first-name" id="first-name" class="contact-modal-focusable-elt modal-input"
+          aria-labelledby="first-name-label" aria-describedby="first-name-format" aria-invalid="false"
           data-regex="name" required>
-        <label for="last-name" class="modal-label">Nom</label>
+        </span>
+
+        <label for="last-name" class="modal-label" id="last-name-label">Nom</label>
+        <span>
+          <span class="hidden" id="last-name-format">
+            le nom doit comporter au moins deux lettres.
+          </span>
         <input type="text" name="last-name" id="last-name" class="contact-modal-focusable-elt modal-input"
-          data-regex="name" required>
-        <label for="mail" class="modal-label">Email</label>
-        <input type="mail" name="mail" id="mail" class="contact-modal-focusable-elt modal-input" data-regex="mail"
-          required>
-        <label for="message" class="modal-label">Votre message</label>
+          aria-labelledby="last-name-label" aria-describedby="last-name-format" aria-invalid="false" data-regex="name" required>
+        </span>
+
+        <label for="mail" class="modal-label" id="email-label">Email</label>
+        <span>
+          <span class="hidden" id="email-format">
+            le mail doit être au format "exemple@exemple.com"
+          </span>
+        <input type="mail" name="mail" id="mail" class="contact-modal-focusable-elt modal-input"
+          aria-labelledby="email-label" aria-describedby="email-format" aria-invalid="false" data-regex="mail" required>
+        </span>
+
+        <label for="message" class="modal-label" id="message-label">Votre message</label>
+        <span>
+          <span class="hidden" id="message-format">
+            le message doit comporter au moins dix caractères.
+          </span>
         <textarea name="message" id="message" class="contact-modal-focusable-elt modal-message-content"
-          data-regex="message" required></textarea>
-        <button class="contact_button contact-modal-focusable-elt">Envoyer</button>
+          aria-labelledby="message-label" aria-describedby="message-format" aria-invalid="false" data-regex="message" required></textarea>
+        </span>
+
+        <button class="contact_button contact-modal-focusable-elt" type=submit>Envoyer</button>
       </form>
     </div>
   </section>

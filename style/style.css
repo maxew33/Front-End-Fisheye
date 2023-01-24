@@ -632,4 +632,13 @@ a:visited {
 body {
   font-family: "DM Sans", sans-serif;
   padding: 2.5rem 6.25rem;
+}
+
+.hidden {
+  height: 1px;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 1px;
 }/*# sourceMappingURL=style.css.map */

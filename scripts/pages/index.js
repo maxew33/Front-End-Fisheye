@@ -1,5 +1,9 @@
 import MyApi from "../api/Api.js"
+
+// constructor pattern
 import Photographer from "../models/Photographer.js"
+
+// template
 import PhotographerCard from "../templates/PhotographerCard.js"
 
 const api = new MyApi('./../../data/photographers.json'),
