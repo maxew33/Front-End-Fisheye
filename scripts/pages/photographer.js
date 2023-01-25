@@ -17,15 +17,20 @@ import { closeModal, openModal } from "../utils/modalsDisplaying.js"
 import formChecker from "../utils/formChecker.js"
 
 const api = new MyApi('./../../data/photographers.json'),
+
     mainContainer = document.querySelector('.photographer-banner'),
     gallery = document.querySelector('.photographer-gallery'),
+
     lightbox = document.querySelector('.photographer-lightbox'),
     lightboxMediaContainer = document.querySelector('.media-container'),
     lightboxMediaTitle = document.querySelector('.media-title'),
+
     contactModal = document.getElementById('contact_modal'),
     photographerNameModal = document.querySelector('.photographer-name'),
+
     photographerLikesQty = document.querySelector('.photographer-likes-qty'),
     photographerPriceValue = document.querySelector('.photographer-price-value'),
+    
     galleryContent = [] // an array with the media
 
 let mediaIndex = 0, //index of the current photo for the lightbox
