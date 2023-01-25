@@ -282,12 +282,15 @@ async function main() {
         filterButtons[0].focus()
     })
 
-    filterButtons.forEach(button => {
+    filterButtons.forEach((button, idx) => {
         button.addEventListener('click', () => {
             filterButtonSelected(button.id, button.innerText)
         })
         button.addEventListener('keydown', e => {
             e.key === 'Enter' && filterButtonSelected(button.id, button.innerText)
+            e.key === 'Escape' && filtersBtnContainer.classList.remove('open')
+            e.key === 'ArrowDown' &&  filterButtons[idx === filterButtons.length - 1 ? idx : idx+1].focus()
+            e.key === 'ArrowUp' && filterButtons[idx === 0 ? idx : idx-1].focus()
         })
     })
 
