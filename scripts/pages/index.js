@@ -6,7 +6,7 @@ import Photographer from "../models/Photographer.js"
 // template
 import PhotographerCard from "../templates/PhotographerCard.js"
 
-const api = new MyApi('./../../data/photographers.json'),
+const api = new MyApi('../../data/photographers.json'),
     photographersContainer = document.getElementById('main-homepage')
 
 async function main() {

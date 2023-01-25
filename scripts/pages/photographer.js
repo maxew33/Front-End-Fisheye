@@ -16,7 +16,7 @@ import focusTrap from "../utils/focusTrap.js"
 import { closeModal, openModal } from "../utils/modalsDisplaying.js"
 import formChecker from "../utils/formChecker.js"
 
-const api = new MyApi('./../../data/photographers.json'),
+const api = new MyApi('../../data/photographers.json'),
 
     mainContainer = document.querySelector('.photographer-banner'),
     gallery = document.querySelector('.photographer-gallery'),
