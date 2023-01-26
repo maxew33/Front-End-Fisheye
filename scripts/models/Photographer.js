@@ -23,14 +23,6 @@ export default class Photographer {
         return `${this._city}, ${this._country}`
     }
 
-    get city() {
-        return this._city
-    }
-
-    get country() {
-        return this._country
-    }
-
     get tagline() {
         return this._tagline
     }

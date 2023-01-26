@@ -8,8 +8,8 @@ import Media from "../models/Media.js"
 import MediaFactory from "../factories/MediaFactory.js"
 
 // templates
-import PhotographerGallery from "../templates/PhotographerGallery.js"
 import PhotographerBanner from "../templates/PhotographerBanner.js"
+import PhotographerGallery from "../templates/PhotographerGallery.js"
 
 // utils functions
 import focusTrap from "../utils/focusTrap.js"
@@ -86,7 +86,6 @@ async function main() {
 
     //fill the gallery with the medias and their infos
     const fillGallery = (content) => content.forEach(elt => {
-        gallery.length = 0
         gallery.appendChild(elt)
     })
 

@@ -16,6 +16,7 @@ export default class PhotographerCard {
         const { name, portraitPath, place, tagline, price, id } = this._photographer
 
         const cardContent = `
+        <div class="photographer-card-container">
         <a href="./photographer.html?id=${id}" class="photographer-link">
             <img src="${portraitPath}" class="photographer-portrait" alt="${name}">
             <h2 class="photographer-name">
@@ -32,7 +33,8 @@ export default class PhotographerCard {
             <span class="photographer-price">
                 ${price}
             </span>
-        </p>`
+        </p>
+        </div>`
 
         $container.innerHTML = cardContent
         

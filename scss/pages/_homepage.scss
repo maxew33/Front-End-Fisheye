@@ -1,13 +1,26 @@
 #main-homepage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 100%;
+    max-width: 1440px;
     height: 40rem;
+    margin: 0 auto;
 }
 
 .photographer-card {
     margin-top: 1.5rem;
     @include flex-center-between-column;
+
+    &:nth-child(3n - 2){
+        justify-self: start;
+    }
+
+    &:nth-child(3n){
+        justify-self: end;
+    }
+
+    .photographer-card-container{
+        min-width: 17.5rem;
+    }
 
     .photographer-link {
 

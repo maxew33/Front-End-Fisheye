@@ -19,7 +19,7 @@ export default class Video{
                 </video>`
         }
         else{
-            tag = `<video loop muted autoplay width="250" class="photographer-media photographer-video" aria-label="${this._title}" tabindex="0">    
+            tag = `<video loop muted controls autoplay width="250" class="photographer-media photographer-video" aria-label="${this._title}" tabindex="0">    
                         <source src="${this._videoPath}" type="video/mp4">
                     </video>`
         }

@@ -277,6 +277,8 @@ a:visited {
   align-items: center;
   justify-content: space-between;
   height: 7.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 .header .logo {
   height: 3.125rem;
@@ -485,8 +487,9 @@ a:visited {
 #main-homepage {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
+  max-width: 1440px;
   height: 40rem;
+  margin: 0 auto;
 }
 
 .photographer-card {
@@ -495,6 +498,15 @@ a:visited {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+}
+.photographer-card:nth-child(3n-2) {
+  justify-self: start;
+}
+.photographer-card:nth-child(3n) {
+  justify-self: end;
+}
+.photographer-card .photographer-card-container {
+  min-width: 17.5rem;
 }
 .photographer-card .photographer-link {
   display: flex;
