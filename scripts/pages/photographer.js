@@ -47,9 +47,9 @@ async function main() {
     const myURL = new URLSearchParams(document.location.search)
     const photographerId = parseInt(myURL.get("id"))
 
-    const myPhotographer = new Photographer(photographersInfos.filter(photographer => {
+    const myPhotographer = new Photographer(photographersInfos.find(photographer => {
         return photographer['id'] === photographerId
-    })[0])
+    }))
 
     //creation of the banner for the selected photograph
     const photographerInfos = new PhotographerBanner(myPhotographer)
