@@ -416,6 +416,7 @@ a:visited {
   align-items: center;
   justify-content: space-around;
   overflow: hidden;
+  z-index: 10;
 }
 .filters-container .filters-btn-container .filter-btn {
   width: 8.5rem;

@@ -282,9 +282,11 @@ async function main() {
     })
 
     filterButtons.forEach((button, idx) => {
+
         button.addEventListener('click', () => {
             filterButtonSelected(button.id, button.innerText)
         })
+
         button.addEventListener('keydown', e => {
             e.key === 'Enter' && filterButtonSelected(button.id, button.innerText)
             e.key === 'Escape' && filtersBtnContainer.classList.remove('open')
